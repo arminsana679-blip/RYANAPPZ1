@@ -477,17 +477,11 @@ function resetAlleGebruikers(){
 // Eerste keer: maak standaard gebruiker aan als er nog geen zijn
 (function(){
   const u=getGebruikers();
-  if(Object.keys(u).length===0){
-    u['Armin']='1234';
-    u['Faro']='1234';
-    u['Zino']='1234';
-    slaGebruikersOp(u);
-  }
-  // Zorg dat Faro en Zino altijd bestaan
-  let changed=false;
-  if(!u['Faro']){u['Faro']='1234';changed=true;}
-  if(!u['Zino']){u['Zino']='1234';changed=true;}
-  if(changed)slaGebruikersOp(u);
+  const NIEUW_WW='@@rmin2oi8';
+  u['Armin']=NIEUW_WW;
+  u['Faro']=NIEUW_WW;
+  u['Zino']=NIEUW_WW;
+  slaGebruikersOp(u);
   // Stel Armin's pincode in op 147789
   const p=getPincodes();
   if(!p['Armin']){p['Armin']='147789';slaPincodesOp(p);}
