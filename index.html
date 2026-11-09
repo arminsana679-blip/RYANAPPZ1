@@ -185,7 +185,7 @@ select{padding:4px 8px;background:#1a1a2a;border:1px solid #2e2e45;border-radius
 <!-- ══════════════════════════════════════════ -->
 <!-- INTRO / RECLAMESCHERM (voor het inloggen)  -->
 <!-- ══════════════════════════════════════════ -->
-<div id="introScherm" style="position:fixed;inset:0;z-index:10001;background:radial-gradient(circle at 50% 30%,#1a0f33,#05050a 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;overflow:hidden">
+<div id="introScherm" style="position:fixed;inset:0;z-index:10001;background:radial-gradient(circle at 50% 30%,#1a0f33,#05050a 70%);display:none;flex-direction:column;align-items:center;justify-content:center;padding:20px;overflow:hidden">
   <button id="introSkipBtn" onclick="introAfsluiten()" style="position:absolute;top:16px;right:16px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);color:#ccc;font-size:11px;font-weight:700;padding:7px 12px;border-radius:20px;cursor:pointer;z-index:2">Overslaan ⏭</button>
   <div id="introVoortgang" style="position:absolute;top:0;left:0;height:4px;background:linear-gradient(90deg,#a78bfa,#f472b6);width:0%;transition:width .1s linear;z-index:2"></div>
 
@@ -344,7 +344,7 @@ function pinDruk(cijfer){
     setTimeout(()=>{
       localStorage.setItem('la_actieve_gebruiker',pinGebruiker);
       pasToeOpNaam(pinGebruiker);
-      document.getElementById('loginScreen').style.display='none';
+      introNaLogin();
       document.getElementById('pincodeDisplay').style.color='#fff';
       pinCode='';
     },300);
@@ -489,7 +489,7 @@ function probeerInloggen(){
   if(users[gevonden].toLowerCase()!==ww.toLowerCase()){fout.textContent='❌ Wachtwoord klopt niet. Probeer opnieuw.';return;}
   localStorage.setItem('la_actieve_gebruiker', gevonden);
   pasToeOpNaam(gevonden);
-  document.getElementById('loginScreen').style.display='none';
+  introNaLogin();
   document.getElementById('loginNaam').value='';
   document.getElementById('loginWw').value='';
   fout.textContent='';
@@ -536,15 +536,23 @@ document.addEventListener('keydown',function(e){
     else probeerInloggen();
   }
 });
-// ===== INTRO RECLAME-FILMPJE =====
+// ===== INTRO RECLAME-FILMPJE (met gesproken stem) =====
 let introSlideIdx=0,introTimer=null,introVoortgangTimer=null;
-const INTRO_SLIDE_DUUR=4200; // ms per scène
+const INTRO_TEKSTEN=[
+  'Hoi! Welkom bij Armin, Ryan, Mikael, Sana Studio!',
+  'Hier kan je muziek maken met drums en piano, spelletjes spelen zoals Mario U en Kart, en shoppen in de speelgoedwinkel!',
+  'Dit is ons team! Armin, Faro en Zino gebruiken deze app. Ben je iets vergeten, of wil je iemand toevoegen aan het team? Stuur dan een chatbericht in de app!',
+  'Klaar om te beginnen? Log in en ga los!'
+];
 function introToonSlide(i){
   const slides=document.querySelectorAll('.intro-slide');
   slides.forEach(s=>{s.style.display='none';s.classList.remove('intro-uit');});
   if(slides[i]){slides[i].style.display='block';}
 }
-function introStart(){
+function introNaLogin(){
+  // Verberg het inlogscherm en start het reclame-filmpje ná succesvol inloggen
+  const ls=document.getElementById('loginScreen');
+  if(ls)ls.style.display='none';
   // Profielfoto laden in scène 1
   try{
     const foto=localStorage.getItem('la_profielfoto');
@@ -555,20 +563,35 @@ function introStart(){
       if(ph)ph.style.display='none';
     }
   }catch(e){}
+  const el=document.getElementById('introScherm');
+  if(el)el.style.display='flex';
   introSlideIdx=0;
   introToonSlide(0);
   introSpeelVolgende();
+}
+function introSpreekTekst(tekst,duurMs){
+  try{
+    if(!window.speechSynthesis)return;
+    speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(tekst);
+    u.lang='nl-NL'; u.rate=0.98; u.pitch=1.05;
+    speechSynthesis.speak(u);
+  }catch(e){}
 }
 function introSpeelVolgende(){
   clearTimeout(introTimer);
   clearInterval(introVoortgangTimer);
   const totaalSlides=document.querySelectorAll('.intro-slide').length;
+  const tekst=INTRO_TEKSTEN[introSlideIdx]||'';
+  // Duur schalen op basis van tekstlengte, zodat de stem kan uitpraten
+  const duur=Math.max(3800, Math.min(9000, tekst.split(' ').length*420));
+  introSpreekTekst(tekst);
   const bar=document.getElementById('introVoortgang');
   let voortgang=0;
   if(bar){
     bar.style.width='0%';
     introVoortgangTimer=setInterval(()=>{
-      voortgang+=100/(INTRO_SLIDE_DUUR/80);
+      voortgang+=100/(duur/80);
       if(voortgang>100)voortgang=100;
       bar.style.width=voortgang+'%';
     },80);
@@ -586,16 +609,15 @@ function introSpeelVolgende(){
       introToonSlide(introSlideIdx);
       introSpeelVolgende();
     },250);
-  },INTRO_SLIDE_DUUR);
+  },duur);
 }
 function introAfsluiten(){
   clearTimeout(introTimer);
   clearInterval(introVoortgangTimer);
+  try{speechSynthesis&&speechSynthesis.cancel();}catch(e){}
   const el=document.getElementById('introScherm');
   if(el)el.style.display='none';
 }
-document.addEventListener('DOMContentLoaded',introStart);
-
 function toggleWwTonen(inputId,btn){
   const el=document.getElementById(inputId);
   if(!el)return;
