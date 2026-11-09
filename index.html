@@ -216,7 +216,10 @@ select{padding:4px 8px;background:#1a1a2a;border:1px solid #2e2e45;border-radius
       <div id="normaaleLogin">
         <div style="font-size:11px;color:#444;margin-bottom:8px;text-align:center">— of typ handmatig —</div>
         <input id="loginNaam" type="text" placeholder="Gebruikersnaam" style="width:100%;box-sizing:border-box;background:#1a1a2e;border:1px solid #2a2a4a;color:#e2e8f0;border-radius:8px;padding:10px 12px;font-size:13px;margin-bottom:8px;outline:none">
-        <input id="loginWw" type="password" placeholder="Wachtwoord" style="width:100%;box-sizing:border-box;background:#1a1a2e;border:1px solid #2a2a4a;color:#e2e8f0;border-radius:8px;padding:10px 12px;font-size:13px;margin-bottom:12px;outline:none">
+        <div style="position:relative;margin-bottom:12px">
+          <input id="loginWw" type="password" placeholder="Wachtwoord" style="width:100%;box-sizing:border-box;background:#1a1a2e;border:1px solid #2a2a4a;color:#e2e8f0;border-radius:8px;padding:10px 40px 10px 12px;font-size:13px;outline:none">
+          <button type="button" onclick="toggleWwTonen('loginWw',this)" title="Wachtwoord tonen" style="position:absolute;right:6px;top:50%;transform:translateY(-50%);background:transparent;border:none;color:#888;font-size:16px;cursor:pointer;padding:4px">👁️</button>
+        </div>
         <button onclick="probeerInloggen()" style="width:100%;background:#7c3aed;border:none;color:#fff;padding:11px;border-radius:10px;font-size:14px;font-weight:800;cursor:pointer;margin-bottom:8px">🔓 Inloggen</button>
         <button id="stemLoginBtn" onclick="stemInloggen()" style="width:100%;background:#0f172a;border:2px solid #38bdf8;color:#38bdf8;padding:11px;border-radius:10px;font-size:14px;font-weight:800;cursor:pointer;margin-bottom:6px">🎤 Inloggen met stem</button>
         <div id="stemStatus" style="font-size:12px;color:#38bdf8;text-align:center;margin-bottom:6px;min-height:16px"></div>
@@ -229,8 +232,14 @@ select{padding:4px 8px;background:#1a1a2a;border:1px solid #2e2e45;border-radius
     <div id="nieuweGebruikerForm" style="display:none">
       <div style="font-size:13px;color:#a78bfa;font-weight:700;margin-bottom:12px">Nieuwe gebruiker aanmaken</div>
       <input id="nieuwNaam" type="text" placeholder="Kies een gebruikersnaam" style="width:100%;box-sizing:border-box;background:#1a1a2e;border:1px solid #2a2a4a;color:#e2e8f0;border-radius:8px;padding:10px 12px;font-size:13px;margin-bottom:8px;outline:none">
-      <input id="nieuwWw" type="password" placeholder="Kies een wachtwoord" style="width:100%;box-sizing:border-box;background:#1a1a2e;border:1px solid #2a2a4a;color:#e2e8f0;border-radius:8px;padding:10px 12px;font-size:13px;margin-bottom:8px;outline:none">
-      <input id="nieuwWw2" type="password" placeholder="Wachtwoord nogmaals" style="width:100%;box-sizing:border-box;background:#1a1a2e;border:1px solid #2a2a4a;color:#e2e8f0;border-radius:8px;padding:10px 12px;font-size:13px;margin-bottom:12px;outline:none">
+      <div style="position:relative;margin-bottom:8px">
+        <input id="nieuwWw" type="password" placeholder="Kies een wachtwoord" style="width:100%;box-sizing:border-box;background:#1a1a2e;border:1px solid #2a2a4a;color:#e2e8f0;border-radius:8px;padding:10px 40px 10px 12px;font-size:13px;outline:none">
+        <button type="button" onclick="toggleWwTonen('nieuwWw',this)" title="Wachtwoord tonen" style="position:absolute;right:6px;top:50%;transform:translateY(-50%);background:transparent;border:none;color:#888;font-size:16px;cursor:pointer;padding:4px">👁️</button>
+      </div>
+      <div style="position:relative;margin-bottom:12px">
+        <input id="nieuwWw2" type="password" placeholder="Wachtwoord nogmaals" style="width:100%;box-sizing:border-box;background:#1a1a2e;border:1px solid #2a2a4a;color:#e2e8f0;border-radius:8px;padding:10px 40px 10px 12px;font-size:13px;outline:none">
+        <button type="button" onclick="toggleWwTonen('nieuwWw2',this)" title="Wachtwoord tonen" style="position:absolute;right:6px;top:50%;transform:translateY(-50%);background:transparent;border:none;color:#888;font-size:16px;cursor:pointer;padding:4px">👁️</button>
+      </div>
       <div id="nieuwFout" style="color:#ef4444;font-size:11px;margin-bottom:8px;min-height:16px"></div>
       <button onclick="maakNieuweGebruiker()" style="width:100%;background:#16a34a;border:none;color:#fff;padding:11px;border-radius:10px;font-size:14px;font-weight:800;cursor:pointer;margin-bottom:10px">✅ Aanmaken</button>
       <button onclick="toonLoginForm()" style="width:100%;background:transparent;border:1px solid #2a2a4a;color:#888;padding:9px;border-radius:10px;font-size:12px;cursor:pointer">← Terug naar inloggen</button>
@@ -462,6 +471,12 @@ document.addEventListener('keydown',function(e){
     else probeerInloggen();
   }
 });
+function toggleWwTonen(inputId,btn){
+  const el=document.getElementById(inputId);
+  if(!el)return;
+  if(el.type==='password'){el.type='text';btn.textContent='🙈';}
+  else{el.type='password';btn.textContent='👁️';}
+}
 function uitloggen(){
   document.getElementById('loginScreen').style.display='flex';
   document.getElementById('welcomeScreen').style.display='none';
