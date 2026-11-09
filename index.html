@@ -1726,6 +1726,8 @@ function stopAll(){
   document.getElementById('playBtn').classList.remove('active');
   document.getElementById('playDot').style.background='#2a2a3a';
   clearHL();stopLoops();
+  try{stopMuziek();}catch(e){}
+  try{stopSoundtrack();}catch(e){}
 }
 function clearHL(){document.querySelectorAll('.step').forEach(e=>e.classList.remove('playing'));document.getElementById('stepInd').textContent='Step: –';}
 
