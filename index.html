@@ -99,10 +99,10 @@ select{padding:4px 8px;background:#1a1a2a;border:1px solid #2e2e45;border-radius
 #welcomeScreen::before{
   content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
   background:
-    radial-gradient(circle at 15% 10%, rgba(124,58,237,.35), transparent 45%),
-    radial-gradient(circle at 85% 20%, rgba(236,72,153,.28), transparent 45%),
-    radial-gradient(circle at 25% 85%, rgba(56,189,248,.25), transparent 45%),
-    radial-gradient(circle at 80% 90%, rgba(245,158,11,.22), transparent 45%);
+    radial-gradient(circle at 15% 10%, rgba(167,139,250,.38), transparent 45%),
+    radial-gradient(circle at 85% 20%, rgba(244,114,182,.32), transparent 45%),
+    radial-gradient(circle at 25% 85%, rgba(103,232,249,.3), transparent 45%),
+    radial-gradient(circle at 80% 90%, rgba(252,211,77,.28), transparent 45%);
   filter:blur(60px) saturate(140%);
   animation:glassDrift 18s ease-in-out infinite alternate;
 }
@@ -112,51 +112,51 @@ select{padding:4px 8px;background:#1a1a2a;border:1px solid #2e2e45;border-radius
 }
 .glass-tile{
   position:relative;
-  background:linear-gradient(145deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
-  backdrop-filter:blur(18px) saturate(160%);
-  -webkit-backdrop-filter:blur(18px) saturate(160%);
-  border:1px solid rgba(255,255,255,.12);
+  background:linear-gradient(145deg, rgba(255,255,255,.75), rgba(255,255,255,.45));
+  backdrop-filter:blur(18px) saturate(180%);
+  -webkit-backdrop-filter:blur(18px) saturate(180%);
+  border:1px solid rgba(255,255,255,.6);
   border-radius:20px;
   padding:14px 8px;
   cursor:pointer;
   text-align:center;
-  box-shadow:0 8px 24px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.06);
+  box-shadow:0 8px 24px rgba(31,41,55,.1), inset 0 1px 0 rgba(255,255,255,.8);
   transition:transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s cubic-bezier(.22,1,.36,1), border-color .35s;
 }
 .glass-tile:hover{
   transform:translateY(-5px) scale(1.015);
   border-color:var(--accent, #a78bfa);
-  box-shadow:0 16px 36px rgba(0,0,0,.4), 0 0 0 1px var(--accent, #a78bfa) inset, 0 0 28px -4px var(--accent, #a78bfa);
+  box-shadow:0 16px 36px rgba(31,41,55,.16), 0 0 0 1px var(--accent, #a78bfa) inset, 0 0 28px -6px var(--accent, #a78bfa);
 }
 .glass-tile:active{transform:translateY(-1px) scale(.98)}
 .glass-panel{
-  background:linear-gradient(145deg, rgba(255,255,255,.07), rgba(255,255,255,.015));
-  backdrop-filter:blur(22px) saturate(160%);
-  -webkit-backdrop-filter:blur(22px) saturate(160%);
-  border:1px solid rgba(255,255,255,.12);
+  background:linear-gradient(145deg, rgba(255,255,255,.7), rgba(255,255,255,.4));
+  backdrop-filter:blur(22px) saturate(180%);
+  -webkit-backdrop-filter:blur(22px) saturate(180%);
+  border:1px solid rgba(255,255,255,.6);
   border-radius:20px;
-  box-shadow:0 10px 30px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,.06);
+  box-shadow:0 10px 30px rgba(31,41,55,.12), inset 0 1px 0 rgba(255,255,255,.8);
 }
 .glass-pill{
-  background:rgba(255,255,255,.07);
-  backdrop-filter:blur(16px) saturate(160%);
-  -webkit-backdrop-filter:blur(16px) saturate(160%);
-  border:1px solid rgba(255,255,255,.14);
+  background:rgba(255,255,255,.55);
+  backdrop-filter:blur(16px) saturate(180%);
+  -webkit-backdrop-filter:blur(16px) saturate(180%);
+  border:1px solid rgba(255,255,255,.65);
   border-radius:999px;
-  box-shadow:0 4px 14px rgba(0,0,0,.22);
+  box-shadow:0 4px 14px rgba(31,41,55,.1);
 }
 .glass-cta{
-  background:linear-gradient(135deg, rgba(124,58,237,.9), rgba(236,72,153,.85));
+  background:linear-gradient(135deg, rgba(124,58,237,.92), rgba(236,72,153,.88));
   backdrop-filter:blur(20px) saturate(180%);
   -webkit-backdrop-filter:blur(20px) saturate(180%);
-  border:1px solid rgba(255,255,255,.25);
-  box-shadow:0 10px 30px rgba(124,58,237,.35), inset 0 1px 0 rgba(255,255,255,.3);
+  border:1px solid rgba(255,255,255,.4);
+  box-shadow:0 10px 30px rgba(124,58,237,.3), inset 0 1px 0 rgba(255,255,255,.35);
   transition:transform .3s cubic-bezier(.22,1,.36,1), box-shadow .3s;
 }
-.glass-cta:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(124,58,237,.5), inset 0 1px 0 rgba(255,255,255,.35)}
+.glass-cta:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(124,58,237,.42), inset 0 1px 0 rgba(255,255,255,.4)}
 .glass-cta:active{transform:translateY(0)}
 .glass-section-label{
-  font-size:11px;font-weight:700;color:rgba(255,255,255,.45);
+  font-size:11px;font-weight:700;color:rgba(60,60,67,.6);
   text-transform:uppercase;letter-spacing:1.8px;margin-bottom:10px;text-align:left;
 }
 @keyframes mbar1{0%,100%{height:8px}50%{height:36px}}
@@ -723,20 +723,20 @@ function resetAlleGebruikers(){
 <!-- ══════════════════════════════════════════ -->
 <!-- WELKOMSTSCHERM                             -->
 <!-- ══════════════════════════════════════════ -->
-<div id="welcomeScreen" style="position:fixed;inset:0;z-index:9999;background:#050507;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:24px;overflow-y:auto">
+<div id="welcomeScreen" style="position:fixed;inset:0;z-index:9999;background:#f2f2f7;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:24px;overflow-y:auto">
   <canvas id="welcomeBg" style="position:absolute;inset:0;z-index:0;pointer-events:none"></canvas>
   <div style="position:relative;z-index:1;text-align:center;max-width:600px;width:100%">
     <!-- Netwerk muziek panel -->
     <div id="netwerkPanel" class="glass-panel" style="margin-bottom:12px;padding:10px 14px;text-align:left">
       <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px">
         <span style="font-size:16px">📡</span>
-        <span style="font-size:12px;color:#4ade80;font-weight:700">Muziek op alle apparaten</span>
-        <span id="netwerkStatus" style="font-size:10px;color:#666">— server niet verbonden</span>
+        <span style="font-size:12px;color:#16a34a;font-weight:700">Muziek op alle apparaten</span>
+        <span id="netwerkStatus" style="font-size:10px;color:#6e6e73">— server niet verbonden</span>
       </div>
       <div style="display:flex;gap:6px;flex-wrap:wrap">
-        <button onclick="netwerkMuziekStart(0)" style="background:#1a3a1a;border:1px solid #4ade8044;color:#e2e8f0;padding:6px 10px;border-radius:8px;cursor:pointer;font-size:11px">🍄 Mario op alles</button>
-        <button onclick="netwerkMuziekStart(5)" style="background:#1a3a1a;border:1px solid #4ade8044;color:#e2e8f0;padding:6px 10px;border-radius:8px;cursor:pointer;font-size:11px">😴 Slaaplied op alles</button>
-        <button onclick="netwerkMuziekStart(3)" style="background:#1a3a1a;border:1px solid #4ade8044;color:#e2e8f0;padding:6px 10px;border-radius:8px;cursor:pointer;font-size:11px">🚀 Space op alles</button>
+        <button onclick="netwerkMuziekStart(0)" style="background:#dcfce7;border:1px solid #4ade8044;color:#1d1d1f;padding:6px 10px;border-radius:8px;cursor:pointer;font-size:11px">🍄 Mario op alles</button>
+        <button onclick="netwerkMuziekStart(5)" style="background:#dcfce7;border:1px solid #4ade8044;color:#1d1d1f;padding:6px 10px;border-radius:8px;cursor:pointer;font-size:11px">😴 Slaaplied op alles</button>
+        <button onclick="netwerkMuziekStart(3)" style="background:#dcfce7;border:1px solid #4ade8044;color:#1d1d1f;padding:6px 10px;border-radius:8px;cursor:pointer;font-size:11px">🚀 Space op alles</button>
         <button onclick="stopMuziek()" style="background:#ef4444;border:none;color:#fff;padding:6px 12px;border-radius:8px;cursor:pointer;font-size:12px;font-weight:800">⏹ STOP</button>
       </div>
     </div>
@@ -744,16 +744,16 @@ function resetAlleGebruikers(){
     <div id="wekkerPanel" class="glass-panel" style="margin-bottom:12px;padding:10px 14px;text-align:left">
       <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
         <span style="font-size:16px">⏰</span>
-        <span style="font-size:12px;color:#f59e0b;font-weight:700">Wekker voor Faro</span>
-        <input type="time" id="wekkerTijd" value="10:00" style="background:#1a1500;border:1px solid #f59e0b44;color:#f59e0b;border-radius:6px;padding:3px 6px;font-size:12px;cursor:pointer">
+        <span style="font-size:12px;color:#d97706;font-weight:700">Wekker voor Faro</span>
+        <input type="time" id="wekkerTijd" value="10:00" style="background:#fef3c7;border:1px solid #f59e0b44;color:#d97706;border-radius:6px;padding:3px 6px;font-size:12px;cursor:pointer">
         <button onclick="toggleWekker()" id="wekkerBtn" style="background:#f59e0b;border:none;color:#000;padding:4px 10px;border-radius:8px;font-size:11px;font-weight:800;cursor:pointer">🔔 Zetten</button>
-        <button onclick="speelWekkerFaro()" style="background:#1a1500;border:1px solid #f59e0b;color:#f59e0b;padding:4px 10px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer">▶ Test</button>
-        <span id="wekkerStatus" style="font-size:11px;color:#888"></span>
+        <button onclick="speelWekkerFaro()" style="background:#fef3c7;border:1px solid #f59e0b;color:#d97706;padding:4px 10px;border-radius:8px;font-size:11px;font-weight:700;cursor:pointer">▶ Test</button>
+        <span id="wekkerStatus" style="font-size:11px;color:#6e6e73"></span>
       </div>
     </div>
     <!-- Kleur kiezen -->
     <div style="margin-bottom:14px;display:flex;gap:8px;justify-content:center;flex-wrap:wrap;align-items:center">
-      <span style="font-size:11px;color:#666">🎨 Kleur:</span>
+      <span style="font-size:11px;color:#6e6e73">🎨 Kleur:</span>
       <button onclick="kiesWelcomeBg('#0a0a0f')" id="wkb0" style="width:26px;height:26px;border-radius:50%;background:#0a0a0f;border:2px solid #555;cursor:pointer" title="Zwart"></button>
       <button onclick="kiesWelcomeBg('#1e1b4b')" id="wkb1" style="width:26px;height:26px;border-radius:50%;background:#1e1b4b;border:2px solid #555;cursor:pointer" title="Donkerblauw"></button>
       <button onclick="kiesWelcomeBg('#1e3a5f')" id="wkb2" style="width:26px;height:26px;border-radius:50%;background:#1e3a5f;border:2px solid #555;cursor:pointer" title="Blauw"></button>
@@ -768,71 +768,71 @@ function resetAlleGebruikers(){
 
     <!-- Muzieknoot animatie + klok -->
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;padding:0 4px">
-      <div id="welcomeClock" class="glass-pill" style="font-size:12px;color:rgba(255,255,255,.6);font-weight:600;padding:5px 14px"></div>
-      <div id="welcomeMunten" class="glass-pill" style="font-size:12px;color:#fbbf24;font-weight:700;padding:5px 14px"></div>
+      <div id="welcomeClock" class="glass-pill" style="font-size:12px;color:rgba(0,0,0,.6);font-weight:600;padding:5px 14px"></div>
+      <div id="welcomeMunten" class="glass-pill" style="font-size:12px;color:#d97706;font-weight:700;padding:5px 14px"></div>
     </div>
 
     <!-- Logo + naam -->
     <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
       <div style="font-size:52px;animation:welcomePulse 2s ease-in-out infinite" id="welcomeEmoji">⭐</div>
-      <button onclick="uitloggen()" class="glass-pill" style="color:#f87171;padding:7px 16px;font-size:13px;cursor:pointer;font-weight:700;border-color:rgba(239,68,68,.3)">🚪 Uitloggen</button>
+      <button onclick="uitloggen()" class="glass-pill" style="color:#dc2626;padding:7px 16px;font-size:13px;cursor:pointer;font-weight:700;border-color:rgba(239,68,68,.3)">🚪 Uitloggen</button>
     </div>
     <!-- Profielfoto -->
     <div style="text-align:center;margin-bottom:14px">
       <div style="position:relative;display:inline-block">
-        <div id="profielFotoRing" style="width:92px;height:92px;border-radius:50%;border:1px solid rgba(255,255,255,.25);padding:3px;background:linear-gradient(145deg, rgba(167,139,250,.35), rgba(236,72,153,.25));backdrop-filter:blur(14px) saturate(160%);-webkit-backdrop-filter:blur(14px) saturate(160%);box-shadow:0 8px 28px rgba(124,58,237,.35), inset 0 1px 0 rgba(255,255,255,.3);cursor:pointer;overflow:hidden;position:relative" onclick="document.getElementById('profielFotoInput').click()">
+        <div id="profielFotoRing" style="width:92px;height:92px;border-radius:50%;border:1px solid rgba(255,255,255,.7);padding:3px;background:linear-gradient(145deg, rgba(167,139,250,.35), rgba(236,72,153,.25));backdrop-filter:blur(14px) saturate(160%);-webkit-backdrop-filter:blur(14px) saturate(160%);box-shadow:0 8px 28px rgba(124,58,237,.25), inset 0 1px 0 rgba(255,255,255,.6);cursor:pointer;overflow:hidden;position:relative" onclick="document.getElementById('profielFotoInput').click()">
           <img id="profielFotoImg" src="" alt="" style="width:100%;height:100%;border-radius:50%;object-fit:cover;display:none">
           <div id="profielFotoPlaceholder" style="width:100%;height:100%;border-radius:50%;background:#1a1a2e;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px">
             <div style="font-size:28px">👤</div>
-            <div style="font-size:9px;color:#555;font-weight:700">foto</div>
+            <div style="font-size:9px;color:#515154;font-weight:700">foto</div>
           </div>
         </div>
         <!-- Wijzig knop -->
         <div onclick="document.getElementById('profielFotoInput').click()" style="position:absolute;bottom:0;right:0;background:#a78bfa;border-radius:50%;width:24px;height:24px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:13px;border:2px solid #0a0a1a" title="Foto wijzigen">📷</div>
       </div>
       <input type="file" id="profielFotoInput" accept="image/*" style="display:none" onchange="profielFotoLaden(this)">
-      <div style="font-size:10px;color:#444;margin-top:5px">Klik op foto om te wijzigen</div>
+      <div style="font-size:10px;color:#3a3a3c;margin-top:5px">Klik op foto om te wijzigen</div>
     </div>
 
-    <h1 id="welcomeTitel" style="font-size:clamp(26px,5.5vw,46px);font-weight:700;color:#fff;margin:0 0 4px;letter-spacing:-1.2px;background:linear-gradient(135deg,#fff,#c4b5fd 60%,#f9a8d4);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">Welkom Armin, Ryan, Mikael, Sana</h1>
-    <div style="font-size:12px;color:rgba(255,255,255,.4);margin-bottom:8px;letter-spacing:3px;font-weight:600">ARMIN, RYAN, MIKAEL, SANA STUDIO</div>
+    <h1 id="welcomeTitel" style="font-size:clamp(26px,5.5vw,46px);font-weight:700;color:#1d1d1f;margin:0 0 4px;letter-spacing:-1.2px;background:linear-gradient(135deg,#4c1d95,#7c3aed 55%,#db2777);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">Welkom Armin, Ryan, Mikael, Sana</h1>
+    <div style="font-size:12px;color:rgba(0,0,0,.4);margin-bottom:8px;letter-spacing:3px;font-weight:600">ARMIN, RYAN, MIKAEL, SANA STUDIO</div>
 
     <!-- Dagbegroeting -->
-    <div id="welcomeDag" style="font-size:13px;color:#a78bfa;margin-bottom:16px;font-weight:600"></div>
+    <div id="welcomeDag" style="font-size:13px;color:#7c3aed;margin-bottom:16px;font-weight:600"></div>
 
     <div onclick="welcomeKies('drums')" class="glass-cta" style="border-radius:16px;padding:15px;cursor:pointer;font-size:14px;font-weight:700;color:#fff;letter-spacing:.3px;text-align:center;margin-bottom:16px">
       🚀 Alles openen — volledige studio
     </div>
 
-    <div style="font-size:13px;color:rgba(255,255,255,.4);margin-bottom:14px;font-weight:600">Of kies iets:</div>
+    <div style="font-size:13px;color:rgba(0,0,0,.4);margin-bottom:14px;font-weight:600">Of kies iets:</div>
 
     <!-- Rij 1: Muziek -->
     <div class="glass-section-label">🎵 Muziek</div>
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px">
       <div onclick="welcomeKies('drums')" class="glass-tile" style="--accent:#a78bfa">
         <div style="font-size:28px;margin-bottom:4px">🥁</div>
-        <div style="font-weight:800;font-size:12px;color:#e2e8f0">Drums</div>
-        <div style="font-size:10px;color:#555">Beats maken</div>
+        <div style="font-weight:800;font-size:12px;color:#1d1d1f">Drums</div>
+        <div style="font-size:10px;color:#515154">Beats maken</div>
       </div>
       <div onclick="welcomeKies('piano')" class="glass-tile" style="--accent:#a78bfa">
         <div style="font-size:28px;margin-bottom:4px">🎹</div>
-        <div style="font-weight:800;font-size:12px;color:#e2e8f0">Piano</div>
-        <div style="font-size:10px;color:#555">Noten spelen</div>
+        <div style="font-weight:800;font-size:12px;color:#1d1d1f">Piano</div>
+        <div style="font-size:10px;color:#515154">Noten spelen</div>
       </div>
       <div onclick="welcomeKies('mic')" class="glass-tile" style="--accent:#ec4899">
         <div style="font-size:28px;margin-bottom:4px">🎤</div>
-        <div style="font-weight:800;font-size:12px;color:#e2e8f0">Zingen</div>
-        <div style="font-size:10px;color:#555">Karaoke</div>
+        <div style="font-weight:800;font-size:12px;color:#1d1d1f">Zingen</div>
+        <div style="font-size:10px;color:#515154">Karaoke</div>
       </div>
       <div onclick="showMuziekSpeler()" class="glass-tile" style="--accent:#f59e0b">
         <div style="font-size:28px;margin-bottom:4px">🎧</div>
-        <div style="font-weight:800;font-size:12px;color:#e2e8f0">Muziek</div>
-        <div style="font-size:10px;color:#555">Luisteren</div>
+        <div style="font-weight:800;font-size:12px;color:#1d1d1f">Muziek</div>
+        <div style="font-size:10px;color:#515154">Luisteren</div>
       </div>
       <div onclick="welcomeKies('beats')" class="glass-tile" style="--accent:#a78bfa">
         <div style="font-size:28px;margin-bottom:4px">🎼</div>
-        <div style="font-weight:800;font-size:12px;color:#e2e8f0">Beats</div>
-        <div style="font-size:10px;color:#555">Beatmaker</div>
+        <div style="font-weight:800;font-size:12px;color:#1d1d1f">Beats</div>
+        <div style="font-size:10px;color:#515154">Beatmaker</div>
       </div>
     </div>
 
@@ -841,28 +841,28 @@ function resetAlleGebruikers(){
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px">
       <div onclick="startMarioKartDirect()" class="glass-tile" style="--accent:#f59e0b">
         <div style="font-size:28px;margin-bottom:4px">🏎️</div>
-        <div style="font-weight:800;font-size:12px;color:#e2e8f0">Mario Kart</div>
-        <div style="font-size:10px;color:#555">Racen!</div>
+        <div style="font-weight:800;font-size:12px;color:#1d1d1f">Mario Kart</div>
+        <div style="font-size:10px;color:#515154">Racen!</div>
       </div>
       <div onclick="startSpelDirect('platform')" class="glass-tile" style="--accent:#f59e0b">
         <div style="font-size:28px;margin-bottom:4px">🍄</div>
-        <div style="font-weight:800;font-size:12px;color:#e2e8f0">Spring & Loop</div>
-        <div style="font-size:10px;color:#555">Platformer</div>
+        <div style="font-weight:800;font-size:12px;color:#1d1d1f">Spring & Loop</div>
+        <div style="font-size:10px;color:#515154">Platformer</div>
       </div>
       <div onclick="startSpelDirect('simon')" class="glass-tile" style="--accent:#f59e0b">
         <div style="font-size:28px;margin-bottom:4px">🥁</div>
-        <div style="font-weight:800;font-size:12px;color:#e2e8f0">Simon Zegt</div>
-        <div style="font-size:10px;color:#555">Geheugen</div>
+        <div style="font-weight:800;font-size:12px;color:#1d1d1f">Simon Zegt</div>
+        <div style="font-size:10px;color:#515154">Geheugen</div>
       </div>
       <div onclick="startMarioUDirect()" class="glass-tile" style="--accent:#dc2626">
         <div style="font-size:28px;margin-bottom:4px">🍄</div>
-        <div style="font-weight:800;font-size:12px;color:#e2e8f0">Mario U</div>
-        <div style="font-size:10px;color:#555">New Super Mario</div>
+        <div style="font-weight:800;font-size:12px;color:#1d1d1f">Mario U</div>
+        <div style="font-size:10px;color:#515154">New Super Mario</div>
       </div>
       <div onclick="startPokemonGoDirect()" class="glass-tile" style="--accent:#ef4444;grid-column:span 3">
         <div style="font-size:28px;margin-bottom:4px">🎮</div>
-        <div style="font-weight:800;font-size:12px;color:#e2e8f0">Pokémon Go</div>
-        <div style="font-size:10px;color:#555">Vang Pokémon · Kies trainer</div>
+        <div style="font-weight:800;font-size:12px;color:#1d1d1f">Pokémon Go</div>
+        <div style="font-size:10px;color:#515154">Vang Pokémon · Kies trainer</div>
       </div>
     </div>
 
@@ -870,13 +870,13 @@ function resetAlleGebruikers(){
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
       <div onclick="startShopDirect()" class="glass-tile" style="--accent:#a78bfa">
         <div style="font-size:28px;margin-bottom:4px">🏪</div>
-        <div style="font-weight:800;font-size:12px;color:#e2e8f0">Speelgoed Shop</div>
-        <div style="font-size:10px;color:#555">Kopen met muntjes</div>
+        <div style="font-weight:800;font-size:12px;color:#1d1d1f">Speelgoed Shop</div>
+        <div style="font-size:10px;color:#515154">Kopen met muntjes</div>
       </div>
       <div onclick="startKaartDirect()" class="glass-tile" style="--accent:#3b82f6">
         <div style="font-size:28px;margin-bottom:4px">💳</div>
-        <div style="font-weight:800;font-size:12px;color:#e2e8f0">Mijn Betaalkaart</div>
-        <div style="font-size:10px;color:#555">Saldo & aankopen</div>
+        <div style="font-weight:800;font-size:12px;color:#1d1d1f">Mijn Betaalkaart</div>
+        <div style="font-size:10px;color:#515154">Saldo & aankopen</div>
       </div>
     </div>
 
@@ -885,136 +885,136 @@ function resetAlleGebruikers(){
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px">
       <div onclick="startSpelDirect('keersom')" class="glass-tile" style="--accent:#4ade80">
         <div style="font-size:28px;margin-bottom:4px">✖️</div>
-        <div style="font-weight:800;font-size:12px;color:#e2e8f0">Tafels</div>
-        <div style="font-size:10px;color:#555">Keersom leren</div>
+        <div style="font-weight:800;font-size:12px;color:#1d1d1f">Tafels</div>
+        <div style="font-size:10px;color:#515154">Keersom leren</div>
       </div>
       <div onclick="startSpelDirect('noten')" class="glass-tile" style="--accent:#4ade80">
         <div style="font-size:28px;margin-bottom:4px">🎵</div>
-        <div style="font-weight:800;font-size:12px;color:#e2e8f0">Noten</div>
-        <div style="font-size:10px;color:#555">Raad de noot</div>
+        <div style="font-weight:800;font-size:12px;color:#1d1d1f">Noten</div>
+        <div style="font-size:10px;color:#515154">Raad de noot</div>
       </div>
       <div onclick="showGezondTips()" class="glass-tile" style="--accent:#4ade80">
         <div style="font-size:28px;margin-bottom:4px">🥦</div>
-        <div style="font-weight:800;font-size:12px;color:#e2e8f0">Gezond Eten</div>
-        <div style="font-size:10px;color:#555">Tips & trucs</div>
+        <div style="font-weight:800;font-size:12px;color:#1d1d1f">Gezond Eten</div>
+        <div style="font-size:10px;color:#515154">Tips & trucs</div>
       </div>
       <div onclick="togglePanel('slaapPanel')" class="glass-tile" style="--accent:#818cf8">
         <div style="font-size:28px;margin-bottom:4px">😴</div>
-        <div style="font-weight:800;font-size:12px;color:#e2e8f0">Slaaptips</div>
-        <div style="font-size:10px;color:#555">Goed slapen</div>
+        <div style="font-weight:800;font-size:12px;color:#1d1d1f">Slaaptips</div>
+        <div style="font-size:10px;color:#515154">Goed slapen</div>
       </div>
       <div onclick="togglePanel('beweegPanel')" class="glass-tile" style="--accent:#fb923c">
         <div style="font-size:28px;margin-bottom:4px">🏃</div>
-        <div style="font-weight:800;font-size:12px;color:#e2e8f0">Bewegen</div>
-        <div style="font-size:10px;color:#555">Sport & gym</div>
+        <div style="font-weight:800;font-size:12px;color:#1d1d1f">Bewegen</div>
+        <div style="font-size:10px;color:#515154">Sport & gym</div>
       </div>
       <div onclick="togglePanel('verhaaltjePanel')" class="glass-tile" style="--accent:#f472b6">
         <div style="font-size:28px;margin-bottom:4px">📖</div>
-        <div style="font-weight:800;font-size:12px;color:#e2e8f0">Verhaaltje</div>
-        <div style="font-size:10px;color:#555">Voorlezen</div>
+        <div style="font-weight:800;font-size:12px;color:#1d1d1f">Verhaaltje</div>
+        <div style="font-size:10px;color:#515154">Voorlezen</div>
       </div>
       <div onclick="openTekenPanel()" class="glass-tile" style="--accent:#34d399">
         <div style="font-size:28px;margin-bottom:4px">🎨</div>
-        <div style="font-weight:800;font-size:12px;color:#e2e8f0">Tekenen</div>
-        <div style="font-size:10px;color:#555">Kleur & teken</div>
+        <div style="font-weight:800;font-size:12px;color:#1d1d1f">Tekenen</div>
+        <div style="font-size:10px;color:#515154">Kleur & teken</div>
       </div>
       <div onclick="togglePanel('lettersPanel')" class="glass-tile" style="--accent:#fbbf24">
         <div style="font-size:28px;margin-bottom:4px">🔤</div>
-        <div style="font-weight:800;font-size:12px;color:#e2e8f0">Letters</div>
-        <div style="font-size:10px;color:#555">Alfabet leren</div>
+        <div style="font-weight:800;font-size:12px;color:#1d1d1f">Letters</div>
+        <div style="font-size:10px;color:#515154">Alfabet leren</div>
       </div>
       <div onclick="togglePanel('keukenPanel')" class="glass-tile" style="--accent:#f87171">
         <div style="font-size:28px;margin-bottom:4px">👨‍🍳</div>
-        <div style="font-weight:800;font-size:12px;color:#e2e8f0">Koken</div>
-        <div style="font-size:10px;color:#555">Lekkere recepten</div>
+        <div style="font-weight:800;font-size:12px;color:#1d1d1f">Koken</div>
+        <div style="font-size:10px;color:#515154">Lekkere recepten</div>
       </div>
     </div>
 
     <!-- Slaaptips paneel -->
     <div id="slaapPanel" class="glass-panel" style="display:none;--accent:#818cf8;border-color:#818cf855;padding:14px;margin-bottom:12px">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-        <div style="font-weight:800;color:#818cf8;font-size:15px">😴 Slaaptips</div>
-        <button onclick="togglePanel('slaapPanel');speechSynthesis&&speechSynthesis.cancel()" style="background:none;border:none;color:#888;font-size:18px;cursor:pointer">✕</button>
+        <div style="font-weight:800;color:#4f46e5;font-size:15px">😴 Slaaptips</div>
+        <button onclick="togglePanel('slaapPanel');speechSynthesis&&speechSynthesis.cancel()" style="background:none;border:none;color:#6e6e73;font-size:18px;cursor:pointer">✕</button>
       </div>
-      <div style="display:grid;gap:7px;font-size:12px;color:#ccc;margin-bottom:12px">
-        <div style="background:#111128;border-radius:8px;padding:8px">🕐 <b>Ga op tijd naar bed</b> — kinderen hebben 9 tot 11 uur slaap nodig per nacht!</div>
-        <div style="background:#111128;border-radius:8px;padding:8px">📱 <b>Geen schermen</b> — stop een uur voor bedtijd met telefoon en tablet. Je hersenen worden dan rustig.</div>
-        <div style="background:#111128;border-radius:8px;padding:8px">🌡️ <b>Koele kamer</b> — slaap het beste als de kamer niet te warm is, rond de 18 graden.</div>
-        <div style="background:#111128;border-radius:8px;padding:8px">💧 <b>Drink water</b> — drink geen cola of sap vlak voor bed. Water is het beste!</div>
-        <div style="background:#2a1a3a;border:1px solid #818cf8;border-radius:8px;padding:8px">🧠 <b>Als je teveel denkt</b> — pak een papiertje en schrijf alles op wat in je hoofd zit. Daarna zeg je: "Het staat op papier, ik hoef er niet meer aan te denken." Dan laat je hoofd het los!</div>
-        <div style="background:#2a1a3a;border:1px solid #818cf8;border-radius:8px;padding:8px">🫁 <b>De 4-7-8 ademhaling</b> — adem 4 tellen IN door je neus → hou 7 tellen VAST → blaas 8 tellen UIT door je mond. Doe dit 3 keer. Je lichaam wordt er heel rustig van!</div>
-        <div style="background:#2a1a3a;border:1px solid #818cf8;border-radius:8px;padding:8px">🏖️ <b>Denk aan iets leuks</b> — stel je voor dat je op een warm strand ligt. Je hoort de golven. Je voelt de zon. Geef je hoofd iets fijns om aan te denken!</div>
-        <div style="background:#2a1a3a;border:1px solid #818cf8;border-radius:8px;padding:8px">🎵 <b>Rustige muziek</b> — zet in de app "Ontspanning" of "Slaap kindje slaap" zacht aan. Muziek helpt je hoofd te stoppen met denken.</div>
+      <div style="display:grid;gap:7px;font-size:12px;color:#3a3a3c;margin-bottom:12px">
+        <div style="background:#e0e7ff;border-radius:8px;padding:8px">🕐 <b>Ga op tijd naar bed</b> — kinderen hebben 9 tot 11 uur slaap nodig per nacht!</div>
+        <div style="background:#e0e7ff;border-radius:8px;padding:8px">📱 <b>Geen schermen</b> — stop een uur voor bedtijd met telefoon en tablet. Je hersenen worden dan rustig.</div>
+        <div style="background:#e0e7ff;border-radius:8px;padding:8px">🌡️ <b>Koele kamer</b> — slaap het beste als de kamer niet te warm is, rond de 18 graden.</div>
+        <div style="background:#e0e7ff;border-radius:8px;padding:8px">💧 <b>Drink water</b> — drink geen cola of sap vlak voor bed. Water is het beste!</div>
+        <div style="background:#ede9fe;border:1px solid #818cf8;border-radius:8px;padding:8px">🧠 <b>Als je teveel denkt</b> — pak een papiertje en schrijf alles op wat in je hoofd zit. Daarna zeg je: "Het staat op papier, ik hoef er niet meer aan te denken." Dan laat je hoofd het los!</div>
+        <div style="background:#ede9fe;border:1px solid #818cf8;border-radius:8px;padding:8px">🫁 <b>De 4-7-8 ademhaling</b> — adem 4 tellen IN door je neus → hou 7 tellen VAST → blaas 8 tellen UIT door je mond. Doe dit 3 keer. Je lichaam wordt er heel rustig van!</div>
+        <div style="background:#ede9fe;border:1px solid #818cf8;border-radius:8px;padding:8px">🏖️ <b>Denk aan iets leuks</b> — stel je voor dat je op een warm strand ligt. Je hoort de golven. Je voelt de zon. Geef je hoofd iets fijns om aan te denken!</div>
+        <div style="background:#ede9fe;border:1px solid #818cf8;border-radius:8px;padding:8px">🎵 <b>Rustige muziek</b> — zet in de app "Ontspanning" of "Slaap kindje slaap" zacht aan. Muziek helpt je hoofd te stoppen met denken.</div>
       </div>
-      <button onclick="voorleesTekst('slaap')" style="width:100%;background:#1e1b4b;border:2px solid #818cf8;color:#818cf8;padding:9px;border-radius:10px;font-size:13px;font-weight:800;cursor:pointer">🔊 Voorlezen</button>
+      <button onclick="voorleesTekst('slaap')" style="width:100%;background:#1e1b4b;border:2px solid #818cf8;color:#4f46e5;padding:9px;border-radius:10px;font-size:13px;font-weight:800;cursor:pointer">🔊 Voorlezen</button>
     </div>
 
     <!-- Bewegen paneel -->
     <div id="beweegPanel" class="glass-panel" style="display:none;--accent:#fb923c;border-color:#fb923c55;padding:14px;margin-bottom:12px">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-        <div style="font-weight:800;color:#fb923c;font-size:15px">🏃 Sport & Bewegen</div>
-        <button onclick="togglePanel('beweegPanel');speechSynthesis&&speechSynthesis.cancel()" style="background:none;border:none;color:#888;font-size:18px;cursor:pointer">✕</button>
+        <div style="font-weight:800;color:#ea580c;font-size:15px">🏃 Sport & Bewegen</div>
+        <button onclick="togglePanel('beweegPanel');speechSynthesis&&speechSynthesis.cancel()" style="background:none;border:none;color:#6e6e73;font-size:18px;cursor:pointer">✕</button>
       </div>
-      <div style="display:grid;gap:7px;font-size:12px;color:#ccc;margin-bottom:12px">
-        <div style="background:#2a1000;border-radius:8px;padding:8px">⚽ <b>Voetballen</b> — 30 minuten buiten spelen is super goed voor je hart en je spieren!</div>
-        <div style="background:#2a1000;border-radius:8px;padding:8px">🚴 <b>Fietsen</b> — fietsen is een van de beste sporten. Je benen worden sterk en je wordt niet moe van school.</div>
-        <div style="background:#2a1000;border-radius:8px;padding:8px">🤸 <b>Gym oefeningen</b> — doe thuis 10 kniebuigingen, 10 sprongen en 10 push-ups. Dat duurt maar 5 minuten!</div>
-        <div style="background:#2a1000;border-radius:8px;padding:8px">🏊 <b>Zwemmen</b> — zwemmen is geweldig voor je hele lichaam. Je armen, benen en buik werken allemaal mee.</div>
-        <div style="background:#2a1000;border-radius:8px;padding:8px">🧘 <b>Stretchen</b> — rek je spieren elke ochtend uit! Dan voel je je de hele dag lekkerder.</div>
+      <div style="display:grid;gap:7px;font-size:12px;color:#3a3a3c;margin-bottom:12px">
+        <div style="background:#ffedd5;border-radius:8px;padding:8px">⚽ <b>Voetballen</b> — 30 minuten buiten spelen is super goed voor je hart en je spieren!</div>
+        <div style="background:#ffedd5;border-radius:8px;padding:8px">🚴 <b>Fietsen</b> — fietsen is een van de beste sporten. Je benen worden sterk en je wordt niet moe van school.</div>
+        <div style="background:#ffedd5;border-radius:8px;padding:8px">🤸 <b>Gym oefeningen</b> — doe thuis 10 kniebuigingen, 10 sprongen en 10 push-ups. Dat duurt maar 5 minuten!</div>
+        <div style="background:#ffedd5;border-radius:8px;padding:8px">🏊 <b>Zwemmen</b> — zwemmen is geweldig voor je hele lichaam. Je armen, benen en buik werken allemaal mee.</div>
+        <div style="background:#ffedd5;border-radius:8px;padding:8px">🧘 <b>Stretchen</b> — rek je spieren elke ochtend uit! Dan voel je je de hele dag lekkerder.</div>
       </div>
-      <button onclick="voorleesTekst('beweeg')" style="width:100%;background:#2a1000;border:2px solid #fb923c;color:#fb923c;padding:9px;border-radius:10px;font-size:13px;font-weight:800;cursor:pointer">🔊 Voorlezen</button>
+      <button onclick="voorleesTekst('beweeg')" style="width:100%;background:#ffedd5;border:2px solid #fb923c;color:#ea580c;padding:9px;border-radius:10px;font-size:13px;font-weight:800;cursor:pointer">🔊 Voorlezen</button>
     </div>
 
     <!-- Verhaaltje paneel -->
     <div id="verhaaltjePanel" class="glass-panel" style="display:none;--accent:#f472b6;border-color:#f472b655;padding:14px;margin-bottom:12px">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-        <div style="font-weight:800;color:#f472b6;font-size:15px">📖 Verhaaltje</div>
-        <button onclick="togglePanel('verhaaltjePanel');speechSynthesis&&speechSynthesis.cancel()" style="background:none;border:none;color:#888;font-size:18px;cursor:pointer">✕</button>
+        <div style="font-weight:800;color:#db2777;font-size:15px">📖 Verhaaltje</div>
+        <button onclick="togglePanel('verhaaltjePanel');speechSynthesis&&speechSynthesis.cancel()" style="background:none;border:none;color:#6e6e73;font-size:18px;cursor:pointer">✕</button>
       </div>
-      <div style="font-size:12px;color:#ccc;line-height:1.7;background:#2a0020;border-radius:8px;padding:12px;margin-bottom:12px">
+      <div style="font-size:12px;color:#3a3a3c;line-height:1.7;background:#fce7f3;border-radius:8px;padding:12px;margin-bottom:12px">
         🌟 <b>Het magische muziekstudio avontuur</b><br><br>
         Er was eens een jongen die Armin heette. Hij hield heel veel van muziek. Op een dag ontdekte hij een magische studio op zijn computer. In die studio kon hij drums spelen, piano spelen en zelfs zijn eigen liedjes maken!<br><br>
         Zijn vriend Faro kwam langs en ze maakten samen de mooiste muziek die je ooit had gehoord. De noten vlogen door de lucht als gouden sterretjes.<br><br>
         Ze speelden de hele middag en lachten veel. Toen het avond werd zei Armin: "Morgen maken we een nog mooier liedje!" En zo gingen ze tevreden naar bed. 🌙
       </div>
-      <button onclick="voorleesTekst('verhaal')" style="width:100%;background:#2a0020;border:2px solid #f472b6;color:#f472b6;padding:9px;border-radius:10px;font-size:13px;font-weight:800;cursor:pointer">🔊 Voorlees het verhaal</button>
+      <button onclick="voorleesTekst('verhaal')" style="width:100%;background:#fce7f3;border:2px solid #f472b6;color:#db2777;padding:9px;border-radius:10px;font-size:13px;font-weight:800;cursor:pointer">🔊 Voorlees het verhaal</button>
     </div>
 
     <!-- Letters paneel -->
     <div id="lettersPanel" class="glass-panel" style="display:none;--accent:#fbbf24;border-color:#fbbf2455;padding:14px;margin-bottom:12px">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-        <div style="font-weight:800;color:#fbbf24;font-size:15px">🔤 Letters & Alfabet</div>
-        <button onclick="togglePanel('lettersPanel');speechSynthesis&&speechSynthesis.cancel()" style="background:none;border:none;color:#888;font-size:18px;cursor:pointer">✕</button>
+        <div style="font-weight:800;color:#d97706;font-size:15px">🔤 Letters & Alfabet</div>
+        <button onclick="togglePanel('lettersPanel');speechSynthesis&&speechSynthesis.cancel()" style="background:none;border:none;color:#6e6e73;font-size:18px;cursor:pointer">✕</button>
       </div>
       <div id="letterGrid" style="display:grid;grid-template-columns:repeat(6,1fr);gap:6px;margin-bottom:12px"></div>
-      <button onclick="voorleesTekst('letters')" style="width:100%;background:#2a2000;border:2px solid #fbbf24;color:#fbbf24;padding:9px;border-radius:10px;font-size:13px;font-weight:800;cursor:pointer">🔊 Zeg het alfabet voor</button>
+      <button onclick="voorleesTekst('letters')" style="width:100%;background:#fef9c3;border:2px solid #fbbf24;color:#d97706;padding:9px;border-radius:10px;font-size:13px;font-weight:800;cursor:pointer">🔊 Zeg het alfabet voor</button>
     </div>
 
     <!-- Koken paneel -->
     <div id="keukenPanel" class="glass-panel" style="display:none;--accent:#f87171;border-color:#f8717155;padding:14px;margin-bottom:12px">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-        <div style="font-weight:800;color:#f87171;font-size:15px">👨‍🍳 Koken & Recepten</div>
-        <button onclick="togglePanel('keukenPanel');speechSynthesis&&speechSynthesis.cancel()" style="background:none;border:none;color:#888;font-size:18px;cursor:pointer">✕</button>
+        <div style="font-weight:800;color:#dc2626;font-size:15px">👨‍🍳 Koken & Recepten</div>
+        <button onclick="togglePanel('keukenPanel');speechSynthesis&&speechSynthesis.cancel()" style="background:none;border:none;color:#6e6e73;font-size:18px;cursor:pointer">✕</button>
       </div>
-      <div style="display:grid;gap:7px;font-size:12px;color:#ccc;margin-bottom:12px">
-        <div style="background:#2a0a0a;border-radius:8px;padding:8px">🥞 <b>Pannenkoeken</b> — meng 100g bloem, 1 ei, 250ml melk en een beetje zout. Bak in een koekenpan met boter!</div>
-        <div style="background:#2a0a0a;border-radius:8px;padding:8px">🍝 <b>Pasta</b> — kook pasta 10 minuten, doe er tomatensaus bij met kaas. Klaar in 15 minuten!</div>
-        <div style="background:#2a0a0a;border-radius:8px;padding:8px">🥗 <b>Salade</b> — sla, tomaat, komkommer en een beetje olijfolie. Simpel en heel gezond!</div>
-        <div style="background:#2a0a0a;border-radius:8px;padding:8px">🍌 <b>Bananen smoothie</b> — mix 1 banaan, 200ml melk en een lepel honing. Heerlijk na het sporten!</div>
+      <div style="display:grid;gap:7px;font-size:12px;color:#3a3a3c;margin-bottom:12px">
+        <div style="background:#fee2e2;border-radius:8px;padding:8px">🥞 <b>Pannenkoeken</b> — meng 100g bloem, 1 ei, 250ml melk en een beetje zout. Bak in een koekenpan met boter!</div>
+        <div style="background:#fee2e2;border-radius:8px;padding:8px">🍝 <b>Pasta</b> — kook pasta 10 minuten, doe er tomatensaus bij met kaas. Klaar in 15 minuten!</div>
+        <div style="background:#fee2e2;border-radius:8px;padding:8px">🥗 <b>Salade</b> — sla, tomaat, komkommer en een beetje olijfolie. Simpel en heel gezond!</div>
+        <div style="background:#fee2e2;border-radius:8px;padding:8px">🍌 <b>Bananen smoothie</b> — mix 1 banaan, 200ml melk en een lepel honing. Heerlijk na het sporten!</div>
       </div>
-      <button onclick="voorleesTekst('koken')" style="width:100%;background:#2a0a0a;border:2px solid #f87171;color:#f87171;padding:9px;border-radius:10px;font-size:13px;font-weight:800;cursor:pointer">🔊 Voorlezen</button>
+      <button onclick="voorleesTekst('koken')" style="width:100%;background:#fee2e2;border:2px solid #f87171;color:#dc2626;padding:9px;border-radius:10px;font-size:13px;font-weight:800;cursor:pointer">🔊 Voorlezen</button>
     </div>
 
     <!-- Tekenen paneel (canvas) -->
     <div id="tekenPanel" class="glass-panel" style="display:none;--accent:#34d399;border-color:#34d39955;padding:14px;margin-bottom:12px">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-        <div style="font-weight:800;color:#34d399;font-size:15px">🎨 Tekenen</div>
-        <button onclick="togglePanel('tekenPanel')" style="background:none;border:none;color:#888;font-size:18px;cursor:pointer">✕</button>
+        <div style="font-weight:800;color:#059669;font-size:15px">🎨 Tekenen</div>
+        <button onclick="togglePanel('tekenPanel')" style="background:none;border:none;color:#6e6e73;font-size:18px;cursor:pointer">✕</button>
       </div>
       <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;align-items:center">
-        <span style="font-size:11px;color:#888">Kleur:</span>
+        <span style="font-size:11px;color:#6e6e73">Kleur:</span>
         <div id="tekenKleuren" style="display:flex;gap:4px;flex-wrap:wrap"></div>
-        <span style="font-size:11px;color:#888;margin-left:6px">Dikte:</span>
+        <span style="font-size:11px;color:#6e6e73;margin-left:6px">Dikte:</span>
         <input type="range" min="2" max="30" value="8" id="tekenDikte" style="width:70px" oninput="tekenDikte=this.value">
         <button onclick="tekenWis()" style="background:#ef4444;border:none;color:#fff;padding:4px 10px;border-radius:6px;font-size:11px;cursor:pointer;margin-left:4px">🗑 Wissen</button>
       </div>
@@ -1026,40 +1026,40 @@ function resetAlleGebruikers(){
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px">
       <div onclick="document.getElementById('wekkerPanel').style.display=document.getElementById('wekkerPanel').style.display==='none'?'block':'none'" class="glass-tile" style="--accent:#f59e0b">
         <div style="font-size:28px;margin-bottom:4px">⏰</div>
-        <div style="font-weight:800;font-size:12px;color:#e2e8f0">Faro Wekker</div>
-        <div style="font-size:10px;color:#555">Wekker zetten</div>
+        <div style="font-weight:800;font-size:12px;color:#1d1d1f">Faro Wekker</div>
+        <div style="font-size:10px;color:#515154">Wekker zetten</div>
       </div>
       <div onclick="welcomeKies('achtergrond')" class="glass-tile" style="--accent:#06b6d4">
         <div style="font-size:28px;margin-bottom:4px">🎨</div>
-        <div style="font-weight:800;font-size:12px;color:#e2e8f0">Lichtshow</div>
-        <div style="font-size:10px;color:#555">Animatie</div>
+        <div style="font-weight:800;font-size:12px;color:#1d1d1f">Lichtshow</div>
+        <div style="font-size:10px;color:#515154">Animatie</div>
       </div>
       <div onclick="welcomeKies('winkel')" class="glass-tile" style="--accent:#f59e0b">
         <div style="font-size:28px;margin-bottom:4px">🛒</div>
-        <div style="font-weight:800;font-size:12px;color:#e2e8f0">Winkeltje</div>
-        <div style="font-size:10px;color:#555">Koop pakketten</div>
+        <div style="font-weight:800;font-size:12px;color:#1d1d1f">Winkeltje</div>
+        <div style="font-size:10px;color:#515154">Koop pakketten</div>
       </div>
       <div onclick="welcomeKies('bibliotheek')" class="glass-tile" style="--accent:#a78bfa">
         <div style="font-size:28px;margin-bottom:4px">📚</div>
-        <div style="font-weight:800;font-size:12px;color:#e2e8f0">Bibliotheek</div>
-        <div style="font-size:10px;color:#555">Opgeslagen</div>
+        <div style="font-weight:800;font-size:12px;color:#1d1d1f">Bibliotheek</div>
+        <div style="font-size:10px;color:#515154">Opgeslagen</div>
       </div>
       <div onclick="toggleChatPanel()" class="glass-tile" style="--accent:#38bdf8">
         <div style="font-size:28px;margin-bottom:4px">💬</div>
-        <div style="font-weight:800;font-size:12px;color:#e2e8f0">Chat</div>
-        <div style="font-size:10px;color:#555">Praten met elkaar</div>
+        <div style="font-weight:800;font-size:12px;color:#1d1d1f">Chat</div>
+        <div style="font-size:10px;color:#515154">Praten met elkaar</div>
       </div>
     </div>
 
     <!-- Chat paneel -->
     <div id="chatPanel" class="glass-panel" style="display:none;--accent:#38bdf8;border-color:#38bdf855;padding:14px;margin-bottom:12px">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-        <div style="font-weight:800;color:#38bdf8;font-size:15px">💬 Chat — Studio Vrienden</div>
-        <button onclick="document.getElementById('chatPanel').style.display='none';clearInterval(window.chatRefreshInterval)" style="background:none;border:none;color:#888;font-size:18px;cursor:pointer">✕</button>
+        <div style="font-weight:800;color:#0284c7;font-size:15px">💬 Chat — Studio Vrienden</div>
+        <button onclick="document.getElementById('chatPanel').style.display='none';clearInterval(window.chatRefreshInterval)" style="background:none;border:none;color:#6e6e73;font-size:18px;cursor:pointer">✕</button>
       </div>
       <!-- Berichten -->
-      <div id="chatBerichten" style="height:180px;overflow-y:auto;background:#060e18;border-radius:8px;padding:8px;margin-bottom:8px;display:flex;flex-direction:column;gap:4px">
-        <div style="color:#555;font-size:12px;text-align:center">Laden...</div>
+      <div id="chatBerichten" style="height:180px;overflow-y:auto;background:#dbeafe;border-radius:8px;padding:8px;margin-bottom:8px;display:flex;flex-direction:column;gap:4px">
+        <div style="color:#515154;font-size:12px;text-align:center">Laden...</div>
       </div>
       <!-- Invoer -->
       <div style="display:flex;gap:6px">
@@ -1068,27 +1068,27 @@ function resetAlleGebruikers(){
           onkeydown="if(event.key==='Enter')stuurChatBericht()">
         <button onclick="stuurChatBericht()" style="background:#0369a1;border:none;color:#fff;padding:8px 14px;border-radius:8px;font-size:13px;font-weight:800;cursor:pointer">📤</button>
       </div>
-      <div style="font-size:10px;color:#444;margin-top:6px;text-align:center">Berichten worden opgeslagen op dit apparaat</div>
+      <div style="font-size:10px;color:#3a3a3c;margin-top:6px;text-align:center">Berichten worden opgeslagen op dit apparaat</div>
     </div>
 
     <!-- Muziek speler popup -->
     <div id="muziekPanel" class="glass-panel" style="display:none;--accent:#f59e0b;border-color:#f59e0b55;padding:16px;margin-bottom:12px;text-align:left">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
-        <div style="font-weight:800;color:#f59e0b;font-size:14px">🎧 Muziek Luisteren</div>
-        <button onclick="sluitMuziek()" style="background:none;border:none;color:#888;font-size:16px;cursor:pointer">✕</button>
+        <div style="font-weight:800;color:#d97706;font-size:14px">🎧 Muziek Luisteren</div>
+        <button onclick="sluitMuziek()" style="background:none;border:none;color:#6e6e73;font-size:16px;cursor:pointer">✕</button>
       </div>
       <!-- Muziek knoppen BOVENAAN -->
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px">
-        <button onclick="speelMuziek(0)" style="background:#1a1500;border:1px solid #f59e0b44;color:#e2e8f0;padding:8px 6px;border-radius:8px;cursor:pointer;font-size:11px;text-align:left">🍄 Super Mario</button>
-        <button onclick="speelMuziek(1)" style="background:#1a1500;border:1px solid #f59e0b44;color:#e2e8f0;padding:8px 6px;border-radius:8px;cursor:pointer;font-size:11px;text-align:left">👾 Monster</button>
-        <button onclick="speelMuziek(2)" style="background:#1a1500;border:1px solid #f59e0b44;color:#e2e8f0;padding:8px 6px;border-radius:8px;cursor:pointer;font-size:11px;text-align:left">🧘 Ontspanning</button>
-        <button onclick="speelMuziek(3)" style="background:#1a1500;border:1px solid #f59e0b44;color:#e2e8f0;padding:8px 6px;border-radius:8px;cursor:pointer;font-size:11px;text-align:left">🚀 Space</button>
-        <button onclick="speelMuziek(4)" style="background:#1a1500;border:1px solid #f59e0b44;color:#e2e8f0;padding:8px 6px;border-radius:8px;cursor:pointer;font-size:11px;text-align:left">💃 Feest Beats</button>
-        <button onclick="speelMuziek(5)" style="background:#1a1500;border:1px solid #f59e0b44;color:#e2e8f0;padding:8px 6px;border-radius:8px;cursor:pointer;font-size:11px;text-align:left">😴 Slaap, kindje, slaap</button>
-        <button onclick="speelMuziek(6)" style="background:#1a1500;border:1px solid #f59e0b44;color:#e2e8f0;padding:8px 6px;border-radius:8px;cursor:pointer;font-size:11px;text-align:left">⚡ Energie Boost</button>
-        <button onclick="speelMuziek(7)" style="background:#1a1500;border:1px solid #f59e0b44;color:#e2e8f0;padding:8px 6px;border-radius:8px;cursor:pointer;font-size:11px;text-align:left">🎹 Piano Avond</button>
+        <button onclick="speelMuziek(0)" style="background:#fef3c7;border:1px solid #f59e0b44;color:#1d1d1f;padding:8px 6px;border-radius:8px;cursor:pointer;font-size:11px;text-align:left">🍄 Super Mario</button>
+        <button onclick="speelMuziek(1)" style="background:#fef3c7;border:1px solid #f59e0b44;color:#1d1d1f;padding:8px 6px;border-radius:8px;cursor:pointer;font-size:11px;text-align:left">👾 Monster</button>
+        <button onclick="speelMuziek(2)" style="background:#fef3c7;border:1px solid #f59e0b44;color:#1d1d1f;padding:8px 6px;border-radius:8px;cursor:pointer;font-size:11px;text-align:left">🧘 Ontspanning</button>
+        <button onclick="speelMuziek(3)" style="background:#fef3c7;border:1px solid #f59e0b44;color:#1d1d1f;padding:8px 6px;border-radius:8px;cursor:pointer;font-size:11px;text-align:left">🚀 Space</button>
+        <button onclick="speelMuziek(4)" style="background:#fef3c7;border:1px solid #f59e0b44;color:#1d1d1f;padding:8px 6px;border-radius:8px;cursor:pointer;font-size:11px;text-align:left">💃 Feest Beats</button>
+        <button onclick="speelMuziek(5)" style="background:#fef3c7;border:1px solid #f59e0b44;color:#1d1d1f;padding:8px 6px;border-radius:8px;cursor:pointer;font-size:11px;text-align:left">😴 Slaap, kindje, slaap</button>
+        <button onclick="speelMuziek(6)" style="background:#fef3c7;border:1px solid #f59e0b44;color:#1d1d1f;padding:8px 6px;border-radius:8px;cursor:pointer;font-size:11px;text-align:left">⚡ Energie Boost</button>
+        <button onclick="speelMuziek(7)" style="background:#fef3c7;border:1px solid #f59e0b44;color:#1d1d1f;padding:8px 6px;border-radius:8px;cursor:pointer;font-size:11px;text-align:left">🎹 Piano Avond</button>
       </div>
-      <button onclick="stopMuziek()" style="width:100%;background:#2a0a0a;border:1px solid #ef444444;color:#f87171;padding:7px;border-radius:8px;cursor:pointer;font-size:12px;margin-bottom:10px">⏹ Stop muziek</button>
+      <button onclick="stopMuziek()" style="width:100%;background:#fee2e2;border:1px solid #ef444444;color:#dc2626;padding:7px;border-radius:8px;cursor:pointer;font-size:12px;margin-bottom:10px">⏹ Stop muziek</button>
       <!-- Visualizer bars -->
       <div id="muziekVis" style="display:none;height:40px;display:flex;align-items:flex-end;gap:3px;margin-bottom:10px;justify-content:center">
         <div class="mbar" style="width:6px;background:#f59e0b;border-radius:3px;animation:mbar1 0.6s ease-in-out infinite"></div>
@@ -1099,54 +1099,54 @@ function resetAlleGebruikers(){
         <div class="mbar" style="width:6px;background:#a78bfa;border-radius:3px;animation:mbar2 0.6s ease-in-out infinite"></div>
         <div class="mbar" style="width:6px;background:#ec4899;border-radius:3px;animation:mbar1 0.5s ease-in-out infinite"></div>
       </div>
-      <div id="huidigNummer" style="font-size:12px;color:#f59e0b;margin-bottom:8px;font-weight:700;min-height:18px;text-align:center"></div>
-      <div style="display:flex;align-items:center;gap:8px;background:#1a1500;border-radius:8px;padding:6px 10px">
+      <div id="huidigNummer" style="font-size:12px;color:#d97706;margin-bottom:8px;font-weight:700;min-height:18px;text-align:center"></div>
+      <div style="display:flex;align-items:center;gap:8px;background:#fef3c7;border-radius:8px;padding:6px 10px">
         <span style="font-size:13px">🔈</span>
-        <input type="range" id="muziekVolSlider" min="1" max="10" value="5" oninput="muziekVolume=this.value/60;document.getElementById('muziekVolTxt').textContent=this.value" style="flex:1;accent-color:#f59e0b;cursor:pointer">
+        <input type="range" id="muziekVolSlider" min="1" max="10" value="5" oninput="muziekVolume=this.value/60;document.getElementById('muziekVolTxt').textContent=this.value" style="flex:1;accent-color:#d97706;cursor:pointer">
         <span style="font-size:13px">🔊</span>
-        <span id="muziekVolTxt" style="font-size:11px;color:#f59e0b;width:16px;text-align:right">5</span>
+        <span id="muziekVolTxt" style="font-size:11px;color:#d97706;width:16px;text-align:right">5</span>
       </div>
     </div>
 
     <!-- Gezond eten popup -->
     <div id="gezondPanel" class="glass-panel" style="display:none;--accent:#4ade80;border-color:#4ade8055;padding:16px;margin-bottom:12px;text-align:left">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-        <div style="font-weight:800;color:#4ade80;font-size:16px">🥦 Gezond Eten</div>
-        <button onclick="document.getElementById('gezondPanel').style.display='none';window.speechSynthesis&&speechSynthesis.cancel()" style="background:none;border:none;color:#888;font-size:18px;cursor:pointer">✕</button>
+        <div style="font-weight:800;color:#16a34a;font-size:16px">🥦 Gezond Eten</div>
+        <button onclick="document.getElementById('gezondPanel').style.display='none';window.speechSynthesis&&speechSynthesis.cancel()" style="background:none;border:none;color:#6e6e73;font-size:18px;cursor:pointer">✕</button>
       </div>
       <!-- 5 voedsel kaartjes -->
       <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:14px">
-        <div style="background:#0a2a0a;border:2px solid #4ade80;border-radius:10px;padding:10px 4px;text-align:center">
+        <div style="background:#dcfce7;border:2px solid #4ade80;border-radius:10px;padding:10px 4px;text-align:center">
           <div style="font-size:28px">🥕</div>
-          <div style="color:#4ade80;font-weight:800;font-size:11px;margin-top:4px">Wortel</div>
-          <div style="color:#aaa;font-size:10px;margin-top:2px">Goed voor je ogen!</div>
+          <div style="color:#16a34a;font-weight:800;font-size:11px;margin-top:4px">Wortel</div>
+          <div style="color:#515154;font-size:10px;margin-top:2px">Goed voor je ogen!</div>
         </div>
-        <div style="background:#0a2a0a;border:2px solid #4ade80;border-radius:10px;padding:10px 4px;text-align:center">
+        <div style="background:#dcfce7;border:2px solid #4ade80;border-radius:10px;padding:10px 4px;text-align:center">
           <div style="font-size:28px">🍎</div>
-          <div style="color:#4ade80;font-weight:800;font-size:11px;margin-top:4px">Appel</div>
-          <div style="color:#aaa;font-size:10px;margin-top:2px">Vitamines C!</div>
+          <div style="color:#16a34a;font-weight:800;font-size:11px;margin-top:4px">Appel</div>
+          <div style="color:#515154;font-size:10px;margin-top:2px">Vitamines C!</div>
         </div>
-        <div style="background:#0a2a0a;border:2px solid #4ade80;border-radius:10px;padding:10px 4px;text-align:center">
+        <div style="background:#dcfce7;border:2px solid #4ade80;border-radius:10px;padding:10px 4px;text-align:center">
           <div style="font-size:28px">🥦</div>
-          <div style="color:#4ade80;font-weight:800;font-size:11px;margin-top:4px">Broccoli</div>
-          <div style="color:#aaa;font-size:10px;margin-top:2px">Sterk en gezond!</div>
+          <div style="color:#16a34a;font-weight:800;font-size:11px;margin-top:4px">Broccoli</div>
+          <div style="color:#515154;font-size:10px;margin-top:2px">Sterk en gezond!</div>
         </div>
-        <div style="background:#0a2a0a;border:2px solid #4ade80;border-radius:10px;padding:10px 4px;text-align:center">
+        <div style="background:#dcfce7;border:2px solid #4ade80;border-radius:10px;padding:10px 4px;text-align:center">
           <div style="font-size:28px">🍌</div>
-          <div style="color:#4ade80;font-weight:800;font-size:11px;margin-top:4px">Banaan</div>
-          <div style="color:#aaa;font-size:10px;margin-top:2px">Geeft energie!</div>
+          <div style="color:#16a34a;font-weight:800;font-size:11px;margin-top:4px">Banaan</div>
+          <div style="color:#515154;font-size:10px;margin-top:2px">Geeft energie!</div>
         </div>
-        <div style="background:#0a2a0a;border:2px solid #4ade80;border-radius:10px;padding:10px 4px;text-align:center">
+        <div style="background:#dcfce7;border:2px solid #4ade80;border-radius:10px;padding:10px 4px;text-align:center">
           <div style="font-size:28px">💧</div>
-          <div style="color:#4ade80;font-weight:800;font-size:11px;margin-top:4px">Water</div>
-          <div style="color:#aaa;font-size:10px;margin-top:2px">6 glazen per dag!</div>
+          <div style="color:#16a34a;font-weight:800;font-size:11px;margin-top:4px">Water</div>
+          <div style="color:#515154;font-size:10px;margin-top:2px">6 glazen per dag!</div>
         </div>
       </div>
       <!-- Voorlees knop -->
-      <button id="voorleesBtn" onclick="voorleesGroenten()" style="width:100%;background:#14532d;border:2px solid #4ade80;color:#4ade80;padding:10px;border-radius:10px;font-size:13px;font-weight:800;cursor:pointer;margin-bottom:8px">
+      <button id="voorleesBtn" onclick="voorleesGroenten()" style="width:100%;background:#bbf7d0;border:2px solid #4ade80;color:#16a34a;padding:10px;border-radius:10px;font-size:13px;font-weight:800;cursor:pointer;margin-bottom:8px">
         🔊 Voorlezen: Waarom zijn groenten zo belangrijk?
       </button>
-      <button onclick="window.speechSynthesis&&speechSynthesis.cancel();document.getElementById('voorleesBtn').textContent='🔊 Voorlezen: Waarom zijn groenten zo belangrijk?'" style="width:100%;background:transparent;border:1px solid #555;color:#888;padding:6px;border-radius:8px;font-size:11px;cursor:pointer">
+      <button onclick="window.speechSynthesis&&speechSynthesis.cancel();document.getElementById('voorleesBtn').textContent='🔊 Voorlezen: Waarom zijn groenten zo belangrijk?'" style="width:100%;background:transparent;border:1px solid #555;color:#6e6e73;padding:6px;border-radius:8px;font-size:11px;cursor:pointer">
         ⏹ Stop met voorlezen
       </button>
     </div>
