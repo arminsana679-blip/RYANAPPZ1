@@ -146,6 +146,45 @@ select{padding:4px 8px;background:#1a1a2a;border:1px solid #2e2e45;border-radius
   text-transform:uppercase;letter-spacing:1.8px;margin-bottom:10px;text-align:left;
 }
 
+/* ══════════ WELKOM ACHTERGROND ANIMATIES ══════════ */
+@keyframes noorderlicht{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+@keyframes sterren{
+  0%{opacity:.4;transform:scale(1)}
+  50%{opacity:1;transform:scale(1.03)}
+  100%{opacity:.4;transform:scale(1)}
+}
+@keyframes zonsondergang{
+  0%{background-position:0% 0%}
+  50%{background-position:100% 100%}
+  100%{background-position:0% 0%}
+}
+@keyframes oceaan{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+@keyframes galaxy{
+  0%{background-position:0% 0%;filter:hue-rotate(0deg)}
+  100%{background-position:200% 200%;filter:hue-rotate(360deg)}
+}
+#welcomeBgCanvas{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0;transition:opacity .6s}
+#welcomeBgCanvas.actief{opacity:1}
+#welkomBgKiezerPanel{
+  position:fixed;bottom:80px;left:50%;transform:translateX(-50%);
+  background:rgba(20,20,35,.95);backdrop-filter:blur(24px);
+  border:1px solid rgba(255,255,255,.12);border-radius:20px;
+  padding:16px 18px;z-index:10001;width:min(380px,90vw);
+  box-shadow:0 20px 60px rgba(0,0,0,.5);
+}
+.wbk-kleur{width:30px;height:30px;border-radius:50%;border:2px solid rgba(255,255,255,.3);cursor:pointer;transition:transform .2s,border-color .2s;flex-shrink:0}
+.wbk-kleur:hover,.wbk-kleur.actief{transform:scale(1.25);border-color:#fff}
+.wbk-anim{padding:7px 12px;border-radius:10px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.07);color:#e2e8f0;font-size:12px;font-weight:700;cursor:pointer;transition:background .2s,border-color .2s;text-align:center}
+.wbk-anim:hover,.wbk-anim.actief{background:rgba(167,139,250,.3);border-color:#a78bfa}
+
 /* ══════════ NETFLIX-STYLE HERO (chic, rustig) ══════════ */
 .nf-hero{
   position:relative;
@@ -947,7 +986,42 @@ function resetAlleGebruikers(){
 <!-- ══════════════════════════════════════════ -->
 <!-- WELKOMSTSCHERM                             -->
 <!-- ══════════════════════════════════════════ -->
-<div id="welcomeScreen" style="position:fixed;inset:0;z-index:9999;background:#f2f2f7;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:24px;overflow-y:auto">
+<div id="welcomeScreen" style="position:fixed;inset:0;z-index:9999;background:#1a1a2e;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:24px;overflow-y:auto;transition:background .6s">
+  <!-- Achtergrond animatie canvas -->
+  <canvas id="welcomeBgCanvas"></canvas>
+
+  <!-- Achtergrond kiezer panel -->
+  <div id="welkomBgKiezerPanel" style="display:none">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+      <div style="font-size:13px;font-weight:800;color:#e2e8f0">🎨 Achtergrond kiezen</div>
+      <button onclick="sluitBgKiezer()" style="background:none;border:none;color:#9a9ab0;font-size:18px;cursor:pointer">✕</button>
+    </div>
+    <div style="font-size:11px;color:#9a9ab0;margin-bottom:8px;font-weight:700;text-transform:uppercase;letter-spacing:1px">Kleur</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
+      <div class="wbk-kleur" style="background:#1a1a2e" onclick="kiesWelkomKleur('#1a1a2e')" title="Donker blauw"></div>
+      <div class="wbk-kleur" style="background:#0f172a" onclick="kiesWelkomKleur('#0f172a')" title="Nachtblauw"></div>
+      <div class="wbk-kleur" style="background:#1a0a2e" onclick="kiesWelkomKleur('#1a0a2e')" title="Paars"></div>
+      <div class="wbk-kleur" style="background:#0a1f0a" onclick="kiesWelkomKleur('#0a1f0a')" title="Donkergroen"></div>
+      <div class="wbk-kleur" style="background:#1a0a0a" onclick="kiesWelkomKleur('#1a0a0a')" title="Donkerrood"></div>
+      <div class="wbk-kleur" style="background:#0a0a0a" onclick="kiesWelkomKleur('#0a0a0a')" title="Zwart"></div>
+      <div class="wbk-kleur" style="background:#1e293b" onclick="kiesWelkomKleur('#1e293b')" title="Leisteen"></div>
+      <div class="wbk-kleur" style="background:#f2f2f7" onclick="kiesWelkomKleur('#f2f2f7')" title="Wit/licht"></div>
+      <label class="wbk-kleur" style="background:conic-gradient(red,yellow,lime,cyan,blue,magenta,red);display:flex;align-items:center;justify-content:center;font-size:14px" title="Eigen kleur">
+        <input type="color" id="welkomEigenKleur" style="opacity:0;position:absolute;width:0;height:0" oninput="kiesWelkomKleur(this.value)">
+        +
+      </label>
+    </div>
+    <div style="font-size:11px;color:#9a9ab0;margin-bottom:8px;font-weight:700;text-transform:uppercase;letter-spacing:1px">Animatie</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+      <div class="wbk-anim" id="wbk-geen" onclick="kiesWelkomAnim('geen')">⬛ Geen</div>
+      <div class="wbk-anim" id="wbk-noorderlicht" onclick="kiesWelkomAnim('noorderlicht')">🌌 Noorderlicht</div>
+      <div class="wbk-anim" id="wbk-sterren" onclick="kiesWelkomAnim('sterren')">✨ Sterren</div>
+      <div class="wbk-anim" id="wbk-zonsondergang" onclick="kiesWelkomAnim('zonsondergang')">🌅 Zonsondergang</div>
+      <div class="wbk-anim" id="wbk-oceaan" onclick="kiesWelkomAnim('oceaan')">🌊 Oceaan</div>
+      <div class="wbk-anim" id="wbk-galaxy" onclick="kiesWelkomAnim('galaxy')">🌠 Galaxy</div>
+    </div>
+  </div>
+
   <!-- Zwevende muziek-widget (compact, altijd bereikbaar) -->
   <div id="musicWidget" class="music-widget" onclick="showMuziekSpeler()" title="Muziek">
     <span>🎧</span><span id="musicWidgetLabel">Muziek</span>
@@ -1224,10 +1298,10 @@ function resetAlleGebruikers(){
         <div style="font-weight:800;font-size:12px;color:#1d1d1f">Faro Wekker</div>
         <div style="font-size:10px;color:#515154">Wekker zetten</div>
       </div>
-      <div onclick="welcomeKies('achtergrond')" class="glass-tile" style="--accent:#06b6d4">
+      <div onclick="openBgKiezer()" class="glass-tile" style="--accent:#06b6d4">
         <div style="font-size:28px;margin-bottom:4px">🎨</div>
-        <div style="font-weight:800;font-size:12px;color:#1d1d1f">Lichtshow</div>
-        <div style="font-size:10px;color:#515154">Animatie</div>
+        <div style="font-weight:800;font-size:12px;color:#1d1d1f">Achtergrond</div>
+        <div style="font-size:10px;color:#515154">Kleur &amp; animatie</div>
       </div>
       <div onclick="welcomeKies('winkel')" class="glass-tile" style="--accent:#f59e0b">
         <div style="font-size:28px;margin-bottom:4px">🛒</div>
@@ -3273,15 +3347,157 @@ function renderBib(){
   });
 }
 
-// ── WELKOMSTSCHERM ──
-// (oude kleurkiezer/sterren-achtergrond verwijderd voor een rustige, chique stijl —
-//  deze functies blijven als no-op staan zodat oude onclick/verwijzingen niet breken)
+// ── WELKOMSTSCHERM ACHTERGROND ──
 function kiesWelcomeBg(){}
 function kiesWelcomeBgGradient(){}
 function slaagWelcomeKleurOp(){}
-function laadWelcomeKleur(){}
 function setWelcomeBg(){}
 function setWelcomeBgGradient(){}
+
+let _bgAnimFrame=null;
+let _bgAnimNaam='geen';
+
+function laadWelcomeKleur(){
+  const k=localStorage.getItem('la_welcomeKleur')||'#1a1a2e';
+  const a=localStorage.getItem('la_welcomeAnim')||'geen';
+  const ws=document.getElementById('welcomeScreen');
+  if(ws)ws.style.background=k;
+  _bgAnimNaam=a;
+  _startWelkomAnim(a);
+}
+
+function openBgKiezer(){
+  const p=document.getElementById('welkomBgKiezerPanel');
+  if(!p)return;
+  p.style.display=p.style.display==='none'?'block':'none';
+  _updateBgKiezerActief();
+}
+function sluitBgKiezer(){
+  const p=document.getElementById('welkomBgKiezerPanel');
+  if(p)p.style.display='none';
+}
+
+function kiesWelkomKleur(kleur){
+  const ws=document.getElementById('welcomeScreen');
+  if(ws)ws.style.background=kleur;
+  localStorage.setItem('la_welcomeKleur',kleur);
+}
+
+function kiesWelkomAnim(naam){
+  _bgAnimNaam=naam;
+  localStorage.setItem('la_welcomeAnim',naam);
+  _startWelkomAnim(naam);
+  _updateBgKiezerActief();
+}
+
+function _updateBgKiezerActief(){
+  ['geen','noorderlicht','sterren','zonsondergang','oceaan','galaxy'].forEach(n=>{
+    const el=document.getElementById('wbk-'+n);
+    if(el)el.classList.toggle('actief',n===_bgAnimNaam);
+  });
+}
+
+function _startWelkomAnim(naam){
+  if(_bgAnimFrame){cancelAnimationFrame(_bgAnimFrame);_bgAnimFrame=null;}
+  const c=document.getElementById('welcomeBgCanvas');
+  if(!c)return;
+  if(naam==='geen'){c.classList.remove('actief');return;}
+  c.classList.add('actief');
+  const ctx=c.getContext('2d');
+  let t=0;
+
+  function resize(){c.width=window.innerWidth;c.height=window.innerHeight;}
+  resize();
+  window.addEventListener('resize',resize);
+
+  function teken(){
+    _bgAnimFrame=requestAnimationFrame(teken);
+    t+=0.005;
+    const w=c.width,h=c.height;
+    ctx.clearRect(0,0,w,h);
+
+    if(naam==='noorderlicht'){
+      const grad=ctx.createLinearGradient(0,0,w,h);
+      grad.addColorStop(0,`hsl(${160+Math.sin(t)*40},80%,${15+Math.sin(t*.7)*5}%)`);
+      grad.addColorStop(.4,`hsl(${200+Math.cos(t*.8)*50},90%,${10+Math.cos(t)*4}%)`);
+      grad.addColorStop(.7,`hsl(${130+Math.sin(t*1.2)*30},70%,${12+Math.sin(t*1.1)*4}%)`);
+      grad.addColorStop(1,`hsl(${260+Math.cos(t*.6)*40},60%,${8+Math.cos(t*.9)*3}%)`);
+      ctx.fillStyle=grad;ctx.fillRect(0,0,w,h);
+      // golvende lichtbanden
+      for(let i=0;i<4;i++){
+        ctx.beginPath();
+        ctx.moveTo(0,h*.3+Math.sin(t+i)*h*.15);
+        for(let x=0;x<w;x+=4){
+          ctx.lineTo(x,h*.3+Math.sin(t+i+x/w*Math.PI*2)*h*.12+Math.cos(t*.7+x/w*Math.PI)*h*.08);
+        }
+        ctx.lineTo(w,0);ctx.lineTo(0,0);ctx.closePath();
+        ctx.fillStyle=`hsla(${140+i*30+Math.sin(t)*20},90%,45%,${.04+Math.sin(t+i)*.02})`;
+        ctx.fill();
+      }
+    } else if(naam==='sterren'){
+      ctx.fillStyle='#06040f';ctx.fillRect(0,0,w,h);
+      const seed=42;
+      for(let i=0;i<220;i++){
+        const sx=((i*seed*17+13)%w);
+        const sy=((i*seed*31+7)%h);
+        const r=.4+((i*7)%3)*.4;
+        const flicker=.5+.5*Math.sin(t*2+i*1.3);
+        ctx.beginPath();ctx.arc(sx,sy,r,0,Math.PI*2);
+        ctx.fillStyle=`rgba(255,255,255,${.3+flicker*.7})`;ctx.fill();
+      }
+      // kleurrijke grote sterren
+      for(let i=0;i<12;i++){
+        const sx=((i*113+37)%w);const sy=((i*79+19)%h);
+        const flicker=.5+.5*Math.sin(t*1.5+i*2.1);
+        ctx.beginPath();ctx.arc(sx,sy,1.2,0,Math.PI*2);
+        ctx.fillStyle=`hsla(${i*30},100%,80%,${flicker})`;ctx.fill();
+      }
+    } else if(naam==='zonsondergang'){
+      const grad=ctx.createLinearGradient(0,0,0,h);
+      grad.addColorStop(0,`hsl(${220+Math.sin(t*.3)*20},60%,${10+Math.sin(t*.2)*3}%)`);
+      grad.addColorStop(.4,`hsl(${280+Math.cos(t*.4)*30},70%,${18+Math.cos(t*.3)*4}%)`);
+      grad.addColorStop(.7,`hsl(${15+Math.sin(t*.5)*15},85%,${35+Math.sin(t*.4)*5}%)`);
+      grad.addColorStop(1,`hsl(${35+Math.cos(t*.3)*10},90%,${45+Math.cos(t*.2)*5}%)`);
+      ctx.fillStyle=grad;ctx.fillRect(0,0,w,h);
+      // zon/maan
+      const sunY=h*.75+Math.sin(t*.2)*h*.03;
+      const sunGrad=ctx.createRadialGradient(w/2,sunY,0,w/2,sunY,80);
+      sunGrad.addColorStop(0,'rgba(255,200,80,.5)');
+      sunGrad.addColorStop(1,'rgba(255,100,30,0)');
+      ctx.fillStyle=sunGrad;ctx.fillRect(0,0,w,h);
+    } else if(naam==='oceaan'){
+      const grad=ctx.createLinearGradient(0,0,w,h);
+      grad.addColorStop(0,`hsl(${200+Math.sin(t*.5)*15},80%,${10+Math.sin(t*.3)*3}%)`);
+      grad.addColorStop(.5,`hsl(${185+Math.cos(t*.4)*20},90%,${18+Math.cos(t*.4)*4}%)`);
+      grad.addColorStop(1,`hsl(${220+Math.sin(t*.3)*10},70%,${12+Math.sin(t*.5)*3}%)`);
+      ctx.fillStyle=grad;ctx.fillRect(0,0,w,h);
+      // golven
+      for(let i=0;i<5;i++){
+        ctx.beginPath();
+        const gy=h*(.4+i*.12);
+        ctx.moveTo(0,gy);
+        for(let x=0;x<=w;x+=3){
+          ctx.lineTo(x,gy+Math.sin(t*1.2+x/w*Math.PI*3+i)*12+Math.cos(t*.8+x/w*Math.PI*2)*6);
+        }
+        ctx.lineTo(w,h);ctx.lineTo(0,h);ctx.closePath();
+        ctx.fillStyle=`rgba(0,180,255,${.04-i*.005})`;ctx.fill();
+      }
+    } else if(naam==='galaxy'){
+      ctx.fillStyle='#04020f';ctx.fillRect(0,0,w,h);
+      const cx2=w/2,cy2=h/2;
+      for(let i=0;i<300;i++){
+        const angle=i*.618*Math.PI*2+t*.05;
+        const dist=Math.sqrt(i/300)*Math.min(w,h)*.45;
+        const x=cx2+Math.cos(angle)*dist;
+        const y=cy2+Math.sin(angle)*dist*.5;
+        const br=.3+.7*(1-i/300)*(.5+.5*Math.sin(t*2+i));
+        ctx.beginPath();ctx.arc(x,y,.8+i/300*1.5,0,Math.PI*2);
+        ctx.fillStyle=`hsla(${200+i/300*160+t*10},80%,80%,${br})`;ctx.fill();
+      }
+    }
+  }
+  teken();
+}
 function updateWelcomeClock(){
   const now=new Date();
   const h=now.getHours(),m=String(now.getMinutes()).padStart(2,'0');
