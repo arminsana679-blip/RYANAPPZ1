@@ -91,6 +91,74 @@ select{padding:4px 8px;background:#1a1a2a;border:1px solid #2e2e45;border-radius
 .btn-record.recording{animation:pulse-rec 1s infinite}
 @keyframes pulse-rec{0%,100%{box-shadow:0 0 0 0 rgba(239,68,68,.5)}50%{box-shadow:0 0 0 12px rgba(239,68,68,0)}}
 @keyframes welcomePulse{0%,100%{transform:scale(1) rotate(-3deg)}50%{transform:scale(1.15) rotate(3deg)}}
+
+/* ══════════ APPLE-STYLE GLASSMORPHISM — LANDINGPAGINA ══════════ */
+#welcomeScreen{
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text",Inter,Helvetica,Arial,sans-serif;
+}
+#welcomeScreen::before{
+  content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(circle at 15% 10%, rgba(124,58,237,.35), transparent 45%),
+    radial-gradient(circle at 85% 20%, rgba(236,72,153,.28), transparent 45%),
+    radial-gradient(circle at 25% 85%, rgba(56,189,248,.25), transparent 45%),
+    radial-gradient(circle at 80% 90%, rgba(245,158,11,.22), transparent 45%);
+  filter:blur(60px) saturate(140%);
+  animation:glassDrift 18s ease-in-out infinite alternate;
+}
+@keyframes glassDrift{
+  0%{transform:scale(1) translate(0,0)}
+  100%{transform:scale(1.12) translate(-2%,2%)}
+}
+.glass-tile{
+  position:relative;
+  background:linear-gradient(145deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+  backdrop-filter:blur(18px) saturate(160%);
+  -webkit-backdrop-filter:blur(18px) saturate(160%);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:20px;
+  padding:14px 8px;
+  cursor:pointer;
+  text-align:center;
+  box-shadow:0 8px 24px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.06);
+  transition:transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s cubic-bezier(.22,1,.36,1), border-color .35s;
+}
+.glass-tile:hover{
+  transform:translateY(-5px) scale(1.015);
+  border-color:var(--accent, #a78bfa);
+  box-shadow:0 16px 36px rgba(0,0,0,.4), 0 0 0 1px var(--accent, #a78bfa) inset, 0 0 28px -4px var(--accent, #a78bfa);
+}
+.glass-tile:active{transform:translateY(-1px) scale(.98)}
+.glass-panel{
+  background:linear-gradient(145deg, rgba(255,255,255,.07), rgba(255,255,255,.015));
+  backdrop-filter:blur(22px) saturate(160%);
+  -webkit-backdrop-filter:blur(22px) saturate(160%);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,.06);
+}
+.glass-pill{
+  background:rgba(255,255,255,.07);
+  backdrop-filter:blur(16px) saturate(160%);
+  -webkit-backdrop-filter:blur(16px) saturate(160%);
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:999px;
+  box-shadow:0 4px 14px rgba(0,0,0,.22);
+}
+.glass-cta{
+  background:linear-gradient(135deg, rgba(124,58,237,.9), rgba(236,72,153,.85));
+  backdrop-filter:blur(20px) saturate(180%);
+  -webkit-backdrop-filter:blur(20px) saturate(180%);
+  border:1px solid rgba(255,255,255,.25);
+  box-shadow:0 10px 30px rgba(124,58,237,.35), inset 0 1px 0 rgba(255,255,255,.3);
+  transition:transform .3s cubic-bezier(.22,1,.36,1), box-shadow .3s;
+}
+.glass-cta:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(124,58,237,.5), inset 0 1px 0 rgba(255,255,255,.35)}
+.glass-cta:active{transform:translateY(0)}
+.glass-section-label{
+  font-size:11px;font-weight:700;color:rgba(255,255,255,.45);
+  text-transform:uppercase;letter-spacing:1.8px;margin-bottom:10px;text-align:left;
+}
 @keyframes mbar1{0%,100%{height:8px}50%{height:36px}}
 @keyframes mbar2{0%,100%{height:20px}50%{height:12px}}
 .level-meter{flex:1;height:16px;background:#181828;border-radius:4px;overflow:hidden;min-width:80px}
@@ -655,11 +723,11 @@ function resetAlleGebruikers(){
 <!-- ══════════════════════════════════════════ -->
 <!-- WELKOMSTSCHERM                             -->
 <!-- ══════════════════════════════════════════ -->
-<div id="welcomeScreen" style="position:fixed;inset:0;z-index:9999;background:#0a0a0f;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:24px;overflow-y:auto">
+<div id="welcomeScreen" style="position:fixed;inset:0;z-index:9999;background:#050507;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:24px;overflow-y:auto">
   <canvas id="welcomeBg" style="position:absolute;inset:0;z-index:0;pointer-events:none"></canvas>
   <div style="position:relative;z-index:1;text-align:center;max-width:600px;width:100%">
     <!-- Netwerk muziek panel -->
-    <div id="netwerkPanel" style="margin-bottom:12px;background:#111118;border:2px solid #4ade8055;border-radius:12px;padding:10px 14px;text-align:left">
+    <div id="netwerkPanel" class="glass-panel" style="margin-bottom:12px;padding:10px 14px;text-align:left">
       <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px">
         <span style="font-size:16px">📡</span>
         <span style="font-size:12px;color:#4ade80;font-weight:700">Muziek op alle apparaten</span>
@@ -673,7 +741,7 @@ function resetAlleGebruikers(){
       </div>
     </div>
     <!-- Wekker voor Faro -->
-    <div id="wekkerPanel" style="margin-bottom:12px;background:#111118;border:2px solid #f59e0b55;border-radius:12px;padding:10px 14px;text-align:left">
+    <div id="wekkerPanel" class="glass-panel" style="margin-bottom:12px;padding:10px 14px;text-align:left">
       <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
         <span style="font-size:16px">⏰</span>
         <span style="font-size:12px;color:#f59e0b;font-weight:700">Wekker voor Faro</span>
@@ -699,20 +767,20 @@ function resetAlleGebruikers(){
     </div>
 
     <!-- Muzieknoot animatie + klok -->
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;padding:0 4px">
-      <div id="welcomeClock" style="font-size:13px;color:#888;font-weight:600"></div>
-      <div id="welcomeMunten" style="font-size:13px;color:#f59e0b;font-weight:700">🪙 0 munten</div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;padding:0 4px">
+      <div id="welcomeClock" class="glass-pill" style="font-size:12px;color:rgba(255,255,255,.6);font-weight:600;padding:5px 14px"></div>
+      <div id="welcomeMunten" class="glass-pill" style="font-size:12px;color:#fbbf24;font-weight:700;padding:5px 14px"></div>
     </div>
 
     <!-- Logo + naam -->
-    <div style="display:flex;align-items:center;gap:12px;margin-bottom:6px">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
       <div style="font-size:52px;animation:welcomePulse 2s ease-in-out infinite" id="welcomeEmoji">⭐</div>
-      <button onclick="uitloggen()" style="background:#2a0a0a;border:1px solid #ef4444;color:#f87171;padding:6px 14px;border-radius:8px;font-size:13px;cursor:pointer;font-weight:700">🚪 Uitloggen</button>
+      <button onclick="uitloggen()" class="glass-pill" style="color:#f87171;padding:7px 16px;font-size:13px;cursor:pointer;font-weight:700;border-color:rgba(239,68,68,.3)">🚪 Uitloggen</button>
     </div>
     <!-- Profielfoto -->
     <div style="text-align:center;margin-bottom:14px">
       <div style="position:relative;display:inline-block">
-        <div id="profielFotoRing" style="width:90px;height:90px;border-radius:50%;border:3px solid #a78bfa;padding:3px;background:#0a0a1a;cursor:pointer;overflow:hidden;position:relative" onclick="document.getElementById('profielFotoInput').click()">
+        <div id="profielFotoRing" style="width:92px;height:92px;border-radius:50%;border:1px solid rgba(255,255,255,.25);padding:3px;background:linear-gradient(145deg, rgba(167,139,250,.35), rgba(236,72,153,.25));backdrop-filter:blur(14px) saturate(160%);-webkit-backdrop-filter:blur(14px) saturate(160%);box-shadow:0 8px 28px rgba(124,58,237,.35), inset 0 1px 0 rgba(255,255,255,.3);cursor:pointer;overflow:hidden;position:relative" onclick="document.getElementById('profielFotoInput').click()">
           <img id="profielFotoImg" src="" alt="" style="width:100%;height:100%;border-radius:50%;object-fit:cover;display:none">
           <div id="profielFotoPlaceholder" style="width:100%;height:100%;border-radius:50%;background:#1a1a2e;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px">
             <div style="font-size:28px">👤</div>
@@ -726,42 +794,42 @@ function resetAlleGebruikers(){
       <div style="font-size:10px;color:#444;margin-top:5px">Klik op foto om te wijzigen</div>
     </div>
 
-    <h1 id="welcomeTitel" style="font-size:clamp(22px,5vw,42px);font-weight:900;color:#a78bfa;margin:0 0 2px;letter-spacing:-1px;text-shadow:0 0 40px #7c3aed88">Welkom Armin, Ryan, Mikael, Sana</h1>
-    <div style="font-size:13px;color:#555;margin-bottom:6px;letter-spacing:2px">ARMIN, RYAN, MIKAEL, SANA STUDIO</div>
+    <h1 id="welcomeTitel" style="font-size:clamp(26px,5.5vw,46px);font-weight:700;color:#fff;margin:0 0 4px;letter-spacing:-1.2px;background:linear-gradient(135deg,#fff,#c4b5fd 60%,#f9a8d4);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent">Welkom Armin, Ryan, Mikael, Sana</h1>
+    <div style="font-size:12px;color:rgba(255,255,255,.4);margin-bottom:8px;letter-spacing:3px;font-weight:600">ARMIN, RYAN, MIKAEL, SANA STUDIO</div>
 
     <!-- Dagbegroeting -->
     <div id="welcomeDag" style="font-size:13px;color:#a78bfa;margin-bottom:16px;font-weight:600"></div>
 
-    <div onclick="welcomeKies('drums')" style="background:linear-gradient(135deg,#7c3aed,#a78bfa);border:none;border-radius:10px;padding:12px;cursor:pointer;font-size:13px;font-weight:700;color:#fff;letter-spacing:1px;text-align:center;margin-bottom:12px">
+    <div onclick="welcomeKies('drums')" class="glass-cta" style="border-radius:16px;padding:15px;cursor:pointer;font-size:14px;font-weight:700;color:#fff;letter-spacing:.3px;text-align:center;margin-bottom:16px">
       🚀 Alles openen — volledige studio
     </div>
 
-    <div style="font-size:13px;color:#888;margin-bottom:12px;font-weight:600">Of kies iets:</div>
+    <div style="font-size:13px;color:rgba(255,255,255,.4);margin-bottom:14px;font-weight:600">Of kies iets:</div>
 
     <!-- Rij 1: Muziek -->
-    <div style="font-size:10px;color:#666;text-transform:uppercase;letter-spacing:2px;margin-bottom:6px;text-align:left">🎵 Muziek</div>
+    <div class="glass-section-label">🎵 Muziek</div>
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px">
-      <div onclick="welcomeKies('drums')" style="background:#111118;border:2px solid #1e1e2e;border-radius:12px;padding:12px 8px;cursor:pointer;transition:.15s;text-align:center" onmouseover="this.style.borderColor='#a78bfa';this.style.background='#1a1030'" onmouseout="this.style.borderColor='#1e1e2e';this.style.background='#111118'">
+      <div onclick="welcomeKies('drums')" class="glass-tile" style="--accent:#a78bfa">
         <div style="font-size:28px;margin-bottom:4px">🥁</div>
         <div style="font-weight:800;font-size:12px;color:#e2e8f0">Drums</div>
         <div style="font-size:10px;color:#555">Beats maken</div>
       </div>
-      <div onclick="welcomeKies('piano')" style="background:#111118;border:2px solid #1e1e2e;border-radius:12px;padding:12px 8px;cursor:pointer;transition:.15s;text-align:center" onmouseover="this.style.borderColor='#a78bfa';this.style.background='#1a1030'" onmouseout="this.style.borderColor='#1e1e2e';this.style.background='#111118'">
+      <div onclick="welcomeKies('piano')" class="glass-tile" style="--accent:#a78bfa">
         <div style="font-size:28px;margin-bottom:4px">🎹</div>
         <div style="font-weight:800;font-size:12px;color:#e2e8f0">Piano</div>
         <div style="font-size:10px;color:#555">Noten spelen</div>
       </div>
-      <div onclick="welcomeKies('mic')" style="background:#111118;border:2px solid #1e1e2e;border-radius:12px;padding:12px 8px;cursor:pointer;transition:.15s;text-align:center" onmouseover="this.style.borderColor='#ec4899';this.style.background='#1a0020'" onmouseout="this.style.borderColor='#1e1e2e';this.style.background='#111118'">
+      <div onclick="welcomeKies('mic')" class="glass-tile" style="--accent:#ec4899">
         <div style="font-size:28px;margin-bottom:4px">🎤</div>
         <div style="font-weight:800;font-size:12px;color:#e2e8f0">Zingen</div>
         <div style="font-size:10px;color:#555">Karaoke</div>
       </div>
-      <div onclick="showMuziekSpeler()" style="background:#111118;border:2px solid #1e1e2e;border-radius:12px;padding:12px 8px;cursor:pointer;transition:.15s;text-align:center" onmouseover="this.style.borderColor='#f59e0b';this.style.background='#1a1500'" onmouseout="this.style.borderColor='#1e1e2e';this.style.background='#111118'">
+      <div onclick="showMuziekSpeler()" class="glass-tile" style="--accent:#f59e0b">
         <div style="font-size:28px;margin-bottom:4px">🎧</div>
         <div style="font-weight:800;font-size:12px;color:#e2e8f0">Muziek</div>
         <div style="font-size:10px;color:#555">Luisteren</div>
       </div>
-      <div onclick="welcomeKies('beats')" style="background:#111118;border:2px solid #1e1e2e;border-radius:12px;padding:12px 8px;cursor:pointer;transition:.15s;text-align:center" onmouseover="this.style.borderColor='#a78bfa';this.style.background='#1a1030'" onmouseout="this.style.borderColor='#1e1e2e';this.style.background='#111118'">
+      <div onclick="welcomeKies('beats')" class="glass-tile" style="--accent:#a78bfa">
         <div style="font-size:28px;margin-bottom:4px">🎼</div>
         <div style="font-weight:800;font-size:12px;color:#e2e8f0">Beats</div>
         <div style="font-size:10px;color:#555">Beatmaker</div>
@@ -769,29 +837,29 @@ function resetAlleGebruikers(){
     </div>
 
     <!-- Rij 2: Spellen -->
-    <div style="font-size:10px;color:#666;text-transform:uppercase;letter-spacing:2px;margin-bottom:6px;text-align:left">🎮 Spellen</div>
+    <div class="glass-section-label">🎮 Spellen</div>
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px">
-      <div onclick="startMarioKartDirect()" style="background:#111118;border:2px solid #1e1e2e;border-radius:12px;padding:12px 8px;cursor:pointer;transition:.15s;text-align:center" onmouseover="this.style.borderColor='#f59e0b';this.style.background='#1a1500'" onmouseout="this.style.borderColor='#1e1e2e';this.style.background='#111118'">
+      <div onclick="startMarioKartDirect()" class="glass-tile" style="--accent:#f59e0b">
         <div style="font-size:28px;margin-bottom:4px">🏎️</div>
         <div style="font-weight:800;font-size:12px;color:#e2e8f0">Mario Kart</div>
         <div style="font-size:10px;color:#555">Racen!</div>
       </div>
-      <div onclick="startSpelDirect('platform')" style="background:#111118;border:2px solid #1e1e2e;border-radius:12px;padding:12px 8px;cursor:pointer;transition:.15s;text-align:center" onmouseover="this.style.borderColor='#f59e0b';this.style.background='#1a1500'" onmouseout="this.style.borderColor='#1e1e2e';this.style.background='#111118'">
+      <div onclick="startSpelDirect('platform')" class="glass-tile" style="--accent:#f59e0b">
         <div style="font-size:28px;margin-bottom:4px">🍄</div>
         <div style="font-weight:800;font-size:12px;color:#e2e8f0">Spring & Loop</div>
         <div style="font-size:10px;color:#555">Platformer</div>
       </div>
-      <div onclick="startSpelDirect('simon')" style="background:#111118;border:2px solid #1e1e2e;border-radius:12px;padding:12px 8px;cursor:pointer;transition:.15s;text-align:center" onmouseover="this.style.borderColor='#f59e0b';this.style.background='#1a1500'" onmouseout="this.style.borderColor='#1e1e2e';this.style.background='#111118'">
+      <div onclick="startSpelDirect('simon')" class="glass-tile" style="--accent:#f59e0b">
         <div style="font-size:28px;margin-bottom:4px">🥁</div>
         <div style="font-weight:800;font-size:12px;color:#e2e8f0">Simon Zegt</div>
         <div style="font-size:10px;color:#555">Geheugen</div>
       </div>
-      <div onclick="startMarioUDirect()" style="background:#111118;border:2px solid #1e1e2e;border-radius:12px;padding:12px 8px;cursor:pointer;transition:.15s;text-align:center" onmouseover="this.style.borderColor='#dc2626';this.style.background='#1a0000'" onmouseout="this.style.borderColor='#1e1e2e';this.style.background='#111118'">
+      <div onclick="startMarioUDirect()" class="glass-tile" style="--accent:#dc2626">
         <div style="font-size:28px;margin-bottom:4px">🍄</div>
         <div style="font-weight:800;font-size:12px;color:#e2e8f0">Mario U</div>
         <div style="font-size:10px;color:#555">New Super Mario</div>
       </div>
-      <div onclick="startPokemonGoDirect()" style="background:#111118;border:2px solid #1e1e2e;border-radius:12px;padding:12px 8px;cursor:pointer;transition:.15s;text-align:center;grid-column:span 3" onmouseover="this.style.borderColor='#ef4444';this.style.background='#1a0000'" onmouseout="this.style.borderColor='#1e1e2e';this.style.background='#111118'">
+      <div onclick="startPokemonGoDirect()" class="glass-tile" style="--accent:#ef4444;grid-column:span 3">
         <div style="font-size:28px;margin-bottom:4px">🎮</div>
         <div style="font-weight:800;font-size:12px;color:#e2e8f0">Pokémon Go</div>
         <div style="font-size:10px;color:#555">Vang Pokémon · Kies trainer</div>
@@ -800,12 +868,12 @@ function resetAlleGebruikers(){
 
     <!-- Shop knop -->
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
-      <div onclick="startShopDirect()" style="background:#111118;border:2px solid #1e1e2e;border-radius:12px;padding:12px 8px;cursor:pointer;transition:.15s;text-align:center" onmouseover="this.style.borderColor='#a78bfa';this.style.background='#1a1030'" onmouseout="this.style.borderColor='#1e1e2e';this.style.background='#111118'">
+      <div onclick="startShopDirect()" class="glass-tile" style="--accent:#a78bfa">
         <div style="font-size:28px;margin-bottom:4px">🏪</div>
         <div style="font-weight:800;font-size:12px;color:#e2e8f0">Speelgoed Shop</div>
         <div style="font-size:10px;color:#555">Kopen met muntjes</div>
       </div>
-      <div onclick="startKaartDirect()" style="background:#111118;border:2px solid #1e1e2e;border-radius:12px;padding:12px 8px;cursor:pointer;transition:.15s;text-align:center" onmouseover="this.style.borderColor='#3b82f6';this.style.background='#001030'" onmouseout="this.style.borderColor='#1e1e2e';this.style.background='#111118'">
+      <div onclick="startKaartDirect()" class="glass-tile" style="--accent:#3b82f6">
         <div style="font-size:28px;margin-bottom:4px">💳</div>
         <div style="font-weight:800;font-size:12px;color:#e2e8f0">Mijn Betaalkaart</div>
         <div style="font-size:10px;color:#555">Saldo & aankopen</div>
@@ -813,49 +881,49 @@ function resetAlleGebruikers(){
     </div>
 
     <!-- Rij 3: Leren -->
-    <div style="font-size:10px;color:#666;text-transform:uppercase;letter-spacing:2px;margin-bottom:6px;text-align:left">📖 Leren</div>
+    <div class="glass-section-label">📖 Leren</div>
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px">
-      <div onclick="startSpelDirect('keersom')" style="background:#111118;border:2px solid #1e1e2e;border-radius:12px;padding:12px 8px;cursor:pointer;transition:.15s;text-align:center" onmouseover="this.style.borderColor='#4ade80';this.style.background='#001a00'" onmouseout="this.style.borderColor='#1e1e2e';this.style.background='#111118'">
+      <div onclick="startSpelDirect('keersom')" class="glass-tile" style="--accent:#4ade80">
         <div style="font-size:28px;margin-bottom:4px">✖️</div>
         <div style="font-weight:800;font-size:12px;color:#e2e8f0">Tafels</div>
         <div style="font-size:10px;color:#555">Keersom leren</div>
       </div>
-      <div onclick="startSpelDirect('noten')" style="background:#111118;border:2px solid #1e1e2e;border-radius:12px;padding:12px 8px;cursor:pointer;transition:.15s;text-align:center" onmouseover="this.style.borderColor='#4ade80';this.style.background='#001a00'" onmouseout="this.style.borderColor='#1e1e2e';this.style.background='#111118'">
+      <div onclick="startSpelDirect('noten')" class="glass-tile" style="--accent:#4ade80">
         <div style="font-size:28px;margin-bottom:4px">🎵</div>
         <div style="font-weight:800;font-size:12px;color:#e2e8f0">Noten</div>
         <div style="font-size:10px;color:#555">Raad de noot</div>
       </div>
-      <div onclick="showGezondTips()" style="background:#111118;border:2px solid #1e1e2e;border-radius:12px;padding:12px 8px;cursor:pointer;transition:.15s;text-align:center" onmouseover="this.style.borderColor='#4ade80';this.style.background='#001a00'" onmouseout="this.style.borderColor='#1e1e2e';this.style.background='#111118'">
+      <div onclick="showGezondTips()" class="glass-tile" style="--accent:#4ade80">
         <div style="font-size:28px;margin-bottom:4px">🥦</div>
         <div style="font-weight:800;font-size:12px;color:#e2e8f0">Gezond Eten</div>
         <div style="font-size:10px;color:#555">Tips & trucs</div>
       </div>
-      <div onclick="togglePanel('slaapPanel')" style="background:#111118;border:2px solid #1e1e2e;border-radius:12px;padding:12px 8px;cursor:pointer;transition:.15s;text-align:center" onmouseover="this.style.borderColor='#818cf8';this.style.background='#0a0a2a'" onmouseout="this.style.borderColor='#1e1e2e';this.style.background='#111118'">
+      <div onclick="togglePanel('slaapPanel')" class="glass-tile" style="--accent:#818cf8">
         <div style="font-size:28px;margin-bottom:4px">😴</div>
         <div style="font-weight:800;font-size:12px;color:#e2e8f0">Slaaptips</div>
         <div style="font-size:10px;color:#555">Goed slapen</div>
       </div>
-      <div onclick="togglePanel('beweegPanel')" style="background:#111118;border:2px solid #1e1e2e;border-radius:12px;padding:12px 8px;cursor:pointer;transition:.15s;text-align:center" onmouseover="this.style.borderColor='#fb923c';this.style.background='#1a0a00'" onmouseout="this.style.borderColor='#1e1e2e';this.style.background='#111118'">
+      <div onclick="togglePanel('beweegPanel')" class="glass-tile" style="--accent:#fb923c">
         <div style="font-size:28px;margin-bottom:4px">🏃</div>
         <div style="font-weight:800;font-size:12px;color:#e2e8f0">Bewegen</div>
         <div style="font-size:10px;color:#555">Sport & gym</div>
       </div>
-      <div onclick="togglePanel('verhaaltjePanel')" style="background:#111118;border:2px solid #1e1e2e;border-radius:12px;padding:12px 8px;cursor:pointer;transition:.15s;text-align:center" onmouseover="this.style.borderColor='#f472b6';this.style.background='#1a0015'" onmouseout="this.style.borderColor='#1e1e2e';this.style.background='#111118'">
+      <div onclick="togglePanel('verhaaltjePanel')" class="glass-tile" style="--accent:#f472b6">
         <div style="font-size:28px;margin-bottom:4px">📖</div>
         <div style="font-weight:800;font-size:12px;color:#e2e8f0">Verhaaltje</div>
         <div style="font-size:10px;color:#555">Voorlezen</div>
       </div>
-      <div onclick="openTekenPanel()" style="background:#111118;border:2px solid #1e1e2e;border-radius:12px;padding:12px 8px;cursor:pointer;transition:.15s;text-align:center" onmouseover="this.style.borderColor='#34d399';this.style.background='#001a10'" onmouseout="this.style.borderColor='#1e1e2e';this.style.background='#111118'">
+      <div onclick="openTekenPanel()" class="glass-tile" style="--accent:#34d399">
         <div style="font-size:28px;margin-bottom:4px">🎨</div>
         <div style="font-weight:800;font-size:12px;color:#e2e8f0">Tekenen</div>
         <div style="font-size:10px;color:#555">Kleur & teken</div>
       </div>
-      <div onclick="togglePanel('lettersPanel')" style="background:#111118;border:2px solid #1e1e2e;border-radius:12px;padding:12px 8px;cursor:pointer;transition:.15s;text-align:center" onmouseover="this.style.borderColor='#fbbf24';this.style.background='#1a1200'" onmouseout="this.style.borderColor='#1e1e2e';this.style.background='#111118'">
+      <div onclick="togglePanel('lettersPanel')" class="glass-tile" style="--accent:#fbbf24">
         <div style="font-size:28px;margin-bottom:4px">🔤</div>
         <div style="font-weight:800;font-size:12px;color:#e2e8f0">Letters</div>
         <div style="font-size:10px;color:#555">Alfabet leren</div>
       </div>
-      <div onclick="togglePanel('keukenPanel')" style="background:#111118;border:2px solid #1e1e2e;border-radius:12px;padding:12px 8px;cursor:pointer;transition:.15s;text-align:center" onmouseover="this.style.borderColor='#f87171';this.style.background='#1a0505'" onmouseout="this.style.borderColor='#1e1e2e';this.style.background='#111118'">
+      <div onclick="togglePanel('keukenPanel')" class="glass-tile" style="--accent:#f87171">
         <div style="font-size:28px;margin-bottom:4px">👨‍🍳</div>
         <div style="font-weight:800;font-size:12px;color:#e2e8f0">Koken</div>
         <div style="font-size:10px;color:#555">Lekkere recepten</div>
@@ -954,29 +1022,29 @@ function resetAlleGebruikers(){
     </div>
 
     <!-- Rij 4: Extra -->
-    <div style="font-size:10px;color:#666;text-transform:uppercase;letter-spacing:2px;margin-bottom:6px;text-align:left">✨ Extra</div>
+    <div class="glass-section-label">✨ Extra</div>
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:10px">
-      <div onclick="document.getElementById('wekkerPanel').style.display=document.getElementById('wekkerPanel').style.display==='none'?'block':'none'" style="background:#111118;border:2px solid #1e1e2e;border-radius:12px;padding:12px 8px;cursor:pointer;transition:.15s;text-align:center" onmouseover="this.style.borderColor='#f59e0b';this.style.background='#1a1500'" onmouseout="this.style.borderColor='#1e1e2e';this.style.background='#111118'">
+      <div onclick="document.getElementById('wekkerPanel').style.display=document.getElementById('wekkerPanel').style.display==='none'?'block':'none'" class="glass-tile" style="--accent:#f59e0b">
         <div style="font-size:28px;margin-bottom:4px">⏰</div>
         <div style="font-weight:800;font-size:12px;color:#e2e8f0">Faro Wekker</div>
         <div style="font-size:10px;color:#555">Wekker zetten</div>
       </div>
-      <div onclick="welcomeKies('achtergrond')" style="background:#111118;border:2px solid #1e1e2e;border-radius:12px;padding:12px 8px;cursor:pointer;transition:.15s;text-align:center" onmouseover="this.style.borderColor='#06b6d4';this.style.background='#001a1a'" onmouseout="this.style.borderColor='#1e1e2e';this.style.background='#111118'">
+      <div onclick="welcomeKies('achtergrond')" class="glass-tile" style="--accent:#06b6d4">
         <div style="font-size:28px;margin-bottom:4px">🎨</div>
         <div style="font-weight:800;font-size:12px;color:#e2e8f0">Lichtshow</div>
         <div style="font-size:10px;color:#555">Animatie</div>
       </div>
-      <div onclick="welcomeKies('winkel')" style="background:#111118;border:2px solid #1e1e2e;border-radius:12px;padding:12px 8px;cursor:pointer;transition:.15s;text-align:center" onmouseover="this.style.borderColor='#f59e0b';this.style.background='#1a1500'" onmouseout="this.style.borderColor='#1e1e2e';this.style.background='#111118'">
+      <div onclick="welcomeKies('winkel')" class="glass-tile" style="--accent:#f59e0b">
         <div style="font-size:28px;margin-bottom:4px">🛒</div>
         <div style="font-weight:800;font-size:12px;color:#e2e8f0">Winkeltje</div>
         <div style="font-size:10px;color:#555">Koop pakketten</div>
       </div>
-      <div onclick="welcomeKies('bibliotheek')" style="background:#111118;border:2px solid #1e1e2e;border-radius:12px;padding:12px 8px;cursor:pointer;transition:.15s;text-align:center" onmouseover="this.style.borderColor='#a78bfa';this.style.background='#1a1030'" onmouseout="this.style.borderColor='#1e1e2e';this.style.background='#111118'">
+      <div onclick="welcomeKies('bibliotheek')" class="glass-tile" style="--accent:#a78bfa">
         <div style="font-size:28px;margin-bottom:4px">📚</div>
         <div style="font-weight:800;font-size:12px;color:#e2e8f0">Bibliotheek</div>
         <div style="font-size:10px;color:#555">Opgeslagen</div>
       </div>
-      <div onclick="toggleChatPanel()" style="background:#111118;border:2px solid #1e1e2e;border-radius:12px;padding:12px 8px;cursor:pointer;transition:.15s;text-align:center" onmouseover="this.style.borderColor='#38bdf8';this.style.background='#001a2a'" onmouseout="this.style.borderColor='#1e1e2e';this.style.background='#111118'">
+      <div onclick="toggleChatPanel()" class="glass-tile" style="--accent:#38bdf8">
         <div style="font-size:28px;margin-bottom:4px">💬</div>
         <div style="font-weight:800;font-size:12px;color:#e2e8f0">Chat</div>
         <div style="font-size:10px;color:#555">Praten met elkaar</div>
