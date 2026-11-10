@@ -776,10 +776,31 @@ if(window.speechSynthesis){
 }
 function _pasUitspraakAan(tekst){
   if(!tekst)return tekst;
-  // "Armin" wordt door veel stemmen als "Armen" uitgesproken (de "in" valt weg
-  // tot een doffe klank). Met een koppelteken leest de stem de twee lettergrepen
-  // apart uit, wat veel dichter bij de juiste uitspraak "Ar-min" komt.
-  return tekst.replace(/\bArmin\b/g,'Ar-min');
+  // Namen die stemmen vaak verkeerd lezen: met een kleine komma-pauze of een
+  // verdubbelde medeklinker dwingen we de juiste klank/lettergreep af.
+  // "Armin" werd gelezen als "Arm"+"in" (-> "Armen"); de komma breekt die
+  // woord-herkenning. "Zino" werd met een lange ie gelezen (open lettergreep);
+  // de dubbele n sluit de lettergreep en dwingt de korte i af.
+  return tekst
+    .replace(/\bArmin\b/g,'Ar, min')
+    .replace(/\bZino\b/g,'Zinno');
+}
+function _splitsInZinnen(tekst){
+  if(!tekst)return [];
+  const stukken=tekst.match(/[^.!?]+[.!?]+|[^.!?]+$/g);
+  return (stukken||[tekst]).map(z=>z.trim()).filter(Boolean);
+}
+// Chrome (en sommige Android-webviews) stoppen een lange speechSynthesis-zin
+// soms stilletjes na ~15 seconden, zonder "onend" of "onerror". Door 'm om de
+// paar seconden heel even te pauzeren en meteen te hervatten blijft hij actief
+// en spreekt hij wél tot het einde uit.
+function _houdSpraakWakker(u){
+  const iv=setInterval(()=>{
+    if(!window.speechSynthesis||!speechSynthesis.speaking){clearInterval(iv);return;}
+    try{speechSynthesis.pause();speechSynthesis.resume();}catch(e){}
+  },4000);
+  const stop=()=>clearInterval(iv);
+  try{u.addEventListener('end',stop);u.addEventListener('error',stop);}catch(e){}
 }
 function spreekNL(tekst,opts){
   opts=opts||{};
@@ -797,19 +818,25 @@ function spreekNL(tekst,opts){
     if(opts.onstart)u.onstart=opts.onstart;
     if(opts.onboundary)u.onboundary=opts.onboundary;
     if(opts.onerror)u.onerror=opts.onerror;
+    _houdSpraakWakker(u);
+    // Een referentie buiten deze functie bewaren: in Chrome kan een utterance
+    // waar niets meer naar verwijst halverwege worden opgeruimd (en dus
+    // stilvallen) terwijl hij nog aan het spreken is.
+    window._laatsteUtterance=u;
     speechSynthesis.speak(u);
     return u;
   }catch(e){return null;}
 }
-// Speelt scène i af: wacht op het ECHTE einde van de stem (onend) i.p.v. een
-// gegokte timer, zodat zinnen nooit meer worden afgekapt. Een minimale
-// kijktijd zorgt dat een scène nooit te kort in beeld flitst, en een
-// veiligheidsnet laat de intro altijd doorgaan als de stem onverhoopt
-// nooit "klaar" meldt.
+// Speelt scène i af, zin voor zin: elke zin wacht op het ECHTE einde van de
+// stem (onend) voordat de volgende begint, zodat niets meer wordt afgekapt —
+// ook niet bij een scène met meerdere zinnen. Een minimale kijktijd zorgt dat
+// een scène nooit te kort in beeld flitst, en een veiligheidsnet laat de
+// intro altijd doorgaan als de stem onverhoopt nooit "klaar" meldt.
 function introSpeelScene(i){
   clearTimeout(introVeiligheidsTimer);
   const totaal=document.querySelectorAll('.intro-slide').length;
   const tekst=INTRO_TEKSTEN[i]||'';
+  const zinnen=_splitsInZinnen(tekst);
   const indicator=document.getElementById('introSpreekIndicator');
   const ring=document.getElementById('introAvatarRing');
   const minDuur=Math.max(2200,Math.min(4200,tekst.split(' ').length*140));
@@ -836,14 +863,26 @@ function introSpeelScene(i){
     },wachtNog);
   };
 
-  if(window.speechSynthesis){
-    spreekNL(tekst,{
-      rate:0.92,pitch:1.05,
-      onstart:()=>{ if(indicator)indicator.style.display='flex'; if(i===0&&ring)ring.classList.add('intro-talking'); },
-      onboundary:(e)=>{ if(e&&typeof e.charIndex==='number'&&tekst.length)introZetDotVoortgang(i,e.charIndex/tekst.length); },
-      onend:volgende,
-      onerror:volgende
-    });
+  if(window.speechSynthesis&&zinnen.length){
+    let zinIdx=0,gesprokenTekens=0;
+    const totaalTekens=tekst.length||1;
+    const spreekVolgendeZin=()=>{
+      if(zinIdx>=zinnen.length){volgende();return;}
+      const zin=zinnen[zinIdx];
+      const klaarMetZin=()=>{
+        gesprokenTekens+=zin.length+1;
+        zinIdx++;
+        setTimeout(spreekVolgendeZin,260); // klein adempauzetje, net als een echte spreker
+      };
+      spreekNL(zin,{
+        rate:0.9,pitch:1.05,
+        onstart:()=>{ if(indicator)indicator.style.display='flex'; if(i===0&&ring)ring.classList.add('intro-talking'); },
+        onboundary:(e)=>{ if(e&&typeof e.charIndex==='number'&&totaalTekens)introZetDotVoortgang(i,(gesprokenTekens+e.charIndex)/totaalTekens); },
+        onend:klaarMetZin,
+        onerror:klaarMetZin
+      });
+    };
+    spreekVolgendeZin();
   }else{
     let voortgang=0;
     const stapTimer=setInterval(()=>{
@@ -853,8 +892,9 @@ function introSpeelScene(i){
     },80);
     setTimeout(volgende,minDuur);
   }
-  // Veiligheidsnet: als "onend" onverhoopt nooit komt, toch doorgaan.
-  introVeiligheidsTimer=setTimeout(volgende,Math.max(9000,tekst.split(' ').length*650));
+  // Veiligheidsnet: als de stem om wat voor reden dan ook nooit "klaar" meldt
+  // (bv. niet beschikbaar of vastgelopen), gaat de intro hoe dan ook door.
+  introVeiligheidsTimer=setTimeout(volgende,Math.max(11000,tekst.split(' ').length*900));
 }
 function introAfsluiten(){
   clearTimeout(introVeiligheidsTimer);
