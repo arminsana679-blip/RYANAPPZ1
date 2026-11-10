@@ -1244,6 +1244,11 @@ function resetAlleGebruikers(){
         <div style="font-weight:800;font-size:12px;color:#1d1d1f">Chat</div>
         <div style="font-size:10px;color:#515154">Praten met elkaar</div>
       </div>
+      <div onclick="startYoutubeDirect()" class="glass-tile" style="--accent:#ef4444">
+        <div style="font-size:28px;margin-bottom:4px">📺</div>
+        <div style="font-weight:800;font-size:12px;color:#1d1d1f">YouTube</div>
+        <div style="font-size:10px;color:#515154">Video's kijken</div>
+      </div>
     </div>
 
     <!-- Chat paneel -->
@@ -2025,6 +2030,26 @@ function resetAlleGebruikers(){
     </div>
   </div>
 
+  <!-- YouTube video's -->
+  <div class="tab-panel" id="tab-youtube">
+    <div style="max-width:780px">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:18px">
+        <div class="section-title" style="margin:0">📺 YouTube Video's</div>
+      </div>
+
+      <div style="display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap">
+        <input id="ytNaamInput" type="text" placeholder="Naam (bv. Kinderliedjes)" style="width:200px;background:#14142a;border:1px solid #282840;border-radius:8px;padding:9px 12px;font-size:13px;color:#e2e8f0">
+        <input id="ytLinkInput" type="text" placeholder="Plak hier een YouTube-link (video of afspeellijst)..." style="flex:1;min-width:240px;background:#14142a;border:1px solid #282840;border-radius:8px;padding:9px 12px;font-size:13px;color:#e2e8f0" onkeydown="if(event.key==='Enter')ytToevoegen()">
+        <button onclick="ytToevoegen()" style="background:#ef4444;border:none;color:#fff;padding:9px 18px;border-radius:8px;font-size:13px;font-weight:800;cursor:pointer;white-space:nowrap">➕ Toevoegen</button>
+      </div>
+      <div id="ytFout" style="display:none;font-size:12px;color:#f87171;margin-bottom:10px"></div>
+      <div style="font-size:11px;color:#9a9ab0;margin-bottom:20px;line-height:1.5">Tip: plak een gewone video-link (youtube.com/watch?v=… of youtu.be/…) of een afspeellijst-link (met &amp;list=…). Een heel kanaal (zoals youtube.com/@naam) kan YouTube zelf niet los insluiten — plak dan een video of afspeellijst van dat kanaal.</div>
+
+      <div id="ytLijst" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px"></div>
+      <div id="ytLeeg" style="text-align:center;color:#333;padding:40px 0;font-size:14px">Nog geen video's toegevoegd.<br>Plak hierboven een YouTube-link!</div>
+    </div>
+  </div>
+
 </div>
 
 <div class="status-bar">
@@ -2768,7 +2793,13 @@ function showToast(msg){
   clearTimeout(window._toastT);window._toastT=setTimeout(()=>t.style.opacity='0',2500);
 }
 function showTab(name){
-  const tabs=['drums','piano','mic','beats','soundtracks','project','achtergrond','spellen','winkel','speelgoedshop','bibliotheek'];
+  // Stop een eventueel spelende YouTube-video als je de pagina verlaat
+  // (anders speelt het geluid onzichtbaar door op een andere tab).
+  if(name!=='youtube'){
+    const huidig=document.querySelector('.tab-panel.active');
+    if(huidig&&huidig.id==='tab-youtube')ytRender();
+  }
+  const tabs=['drums','piano','mic','beats','soundtracks','project','achtergrond','spellen','winkel','speelgoedshop','bibliotheek','youtube'];
   document.querySelectorAll('.tab').forEach((t,i)=>t.classList.toggle('active',tabs[i]===name));
   document.querySelectorAll('.tab-panel').forEach(p=>p.classList.toggle('active',p.id==='tab-'+name));
   if(name==='achtergrond'){buildBgGrid();buildBgMusicGrid();}
@@ -2776,6 +2807,117 @@ function showTab(name){
   if(name==='winkel'){buildWinkel();}
   if(name==='speelgoedshop'){shopInit();}
   if(name==='bibliotheek'){renderBib();}
+  if(name==='youtube'){ytRender();}
+}
+function startYoutubeDirect(){
+  const ws=document.getElementById('welcomeScreen');
+  if(ws){ws.style.display='none';}
+  showTab('youtube');
+}
+
+// ════════════════════════════════════════════════
+// YOUTUBE VIDEO'S — eigen pagina, los van het welkomstscherm
+// ════════════════════════════════════════════════
+function _ytLaadLijst(){
+  try{return JSON.parse(localStorage.getItem('la_ytLijst')||'[]');}catch(e){return [];}
+}
+function _ytBewaarLijst(lijst){
+  try{localStorage.setItem('la_ytLijst',JSON.stringify(lijst));}catch(e){}
+}
+function _ytEscape(s){
+  const d=document.createElement('div');
+  d.textContent=s||'';
+  return d.innerHTML;
+}
+// Haalt een video-ID, afspeellijst-ID of kanaal-upload-ID uit allerlei
+// soorten YouTube-links. Een heel kanaal (zoals /@naam of /c/naam) kan
+// YouTube zelf niet los in een venster tonen — alleen een losse video, een
+// afspeellijst, of (via /channel/UC…) de "alle uploads"-afspeellijst van
+// een kanaal.
+function _ytParseLink(url){
+  if(!url)return null;
+  url=url.trim();
+  if(/^[\w-]{11}$/.test(url))return{type:'video',videoId:url,listId:null};
+  const listMatch=url.match(/[?&]list=([\w-]+)/);
+  const vMatch=
+    url.match(/[?&]v=([\w-]{11})/)||
+    url.match(/youtu\.be\/([\w-]{11})/)||
+    url.match(/youtube\.com\/embed\/([\w-]{11})/)||
+    url.match(/youtube\.com\/shorts\/([\w-]{11})/)||
+    url.match(/youtube\.com\/live\/([\w-]{11})/);
+  if(listMatch)return{type:'playlist',videoId:vMatch?vMatch[1]:null,listId:listMatch[1]};
+  if(vMatch)return{type:'video',videoId:vMatch[1],listId:null};
+  const channelMatch=url.match(/youtube\.com\/channel\/(UC[\w-]{10,})/);
+  if(channelMatch)return{type:'playlist',videoId:null,listId:'UU'+channelMatch[1].slice(2)};
+  return null;
+}
+function _ytEmbedUrl(item){
+  if(item.type==='playlist'){
+    return 'https://www.youtube-nocookie.com/embed/'+(item.videoId||'videoseries')+'?listType=playlist&list='+item.listId+'&autoplay=1&rel=0';
+  }
+  return 'https://www.youtube-nocookie.com/embed/'+item.videoId+'?autoplay=1&rel=0';
+}
+function ytToevoegen(){
+  const naamInp=document.getElementById('ytNaamInput');
+  const linkInp=document.getElementById('ytLinkInput');
+  const fout=document.getElementById('ytFout');
+  const info=_ytParseLink(linkInp?linkInp.value:'');
+  if(!info){
+    if(fout){fout.style.display='block';fout.textContent='⚠️ Dat lijkt geen geldige YouTube video- of afspeellijst-link. Een heel kanaal (@naam) kan niet los ingesloten worden — plak een video of afspeellijst van dat kanaal.';}
+    return;
+  }
+  if(fout)fout.style.display='none';
+  const naam=(naamInp&&naamInp.value.trim())||(info.type==='playlist'?'Afspeellijst':'Video');
+  const lijst=_ytLaadLijst();
+  lijst.push({id:'yt_'+Date.now()+'_'+Math.floor(Math.random()*9999),naam,type:info.type,videoId:info.videoId,listId:info.listId});
+  _ytBewaarLijst(lijst);
+  if(naamInp)naamInp.value='';
+  if(linkInp)linkInp.value='';
+  ytRender();
+}
+function ytVerwijder(id){
+  _ytBewaarLijst(_ytLaadLijst().filter(x=>x.id!==id));
+  ytRender();
+}
+function ytSpeelAf(id){
+  const item=_ytLaadLijst().find(x=>x.id===id);
+  if(!item)return;
+  const wrap=document.querySelector('#ytLijst .yt-thumb-wrap[data-id="'+id+'"]');
+  if(!wrap)return;
+  wrap.innerHTML=
+    '<iframe src="'+_ytEmbedUrl(item)+'" style="position:absolute;inset:0;width:100%;height:100%;border:0" '+
+    'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" '+
+    'allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>'+
+    '<button onclick="event.stopPropagation();ytRender()" title="Stoppen" style="position:absolute;top:6px;right:6px;z-index:2;background:rgba(0,0,0,.6);color:#fff;border:none;width:26px;height:26px;border-radius:50%;cursor:pointer;font-size:13px">✕</button>';
+}
+function ytRender(){
+  const grid=document.getElementById('ytLijst');
+  const leeg=document.getElementById('ytLeeg');
+  if(!grid)return;
+  const lijst=_ytLaadLijst();
+  grid.innerHTML='';
+  if(!lijst.length){if(leeg)leeg.style.display='block';return;}
+  if(leeg)leeg.style.display='none';
+  lijst.forEach(item=>{
+    const kaart=document.createElement('div');
+    kaart.className='yt-card';
+    const thumbSrc=item.videoId?('https://img.youtube.com/vi/'+item.videoId+'/hqdefault.jpg'):'';
+    kaart.innerHTML=
+      '<div class="yt-thumb-wrap" data-id="'+item.id+'" style="position:relative;width:100%;padding-top:56.25%;background:#14142a;border-radius:10px;overflow:hidden;cursor:pointer">'+
+        (thumbSrc?('<img src="'+thumbSrc+'" loading="lazy" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">'):'<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:40px">📺</div>')+
+        '<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.25)">'+
+          '<div style="width:52px;height:52px;border-radius:50%;background:rgba(239,68,68,.92);display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff">▶</div>'+
+        '</div>'+
+        (item.type==='playlist'?'<div style="position:absolute;top:6px;left:6px;background:rgba(0,0,0,.6);color:#fff;font-size:9px;font-weight:700;padding:2px 8px;border-radius:999px;letter-spacing:.5px">AFSPEELLIJST</div>':'')+
+      '</div>'+
+      '<div style="display:flex;align-items:center;gap:6px;margin-top:8px">'+
+        '<div style="flex:1;font-size:13px;font-weight:700;color:#e2e8f0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">'+_ytEscape(item.naam)+'</div>'+
+        '<button onclick="ytVerwijder(\''+item.id+'\')" title="Verwijderen" style="background:#1e1e2e;border:none;color:#ef4444;padding:5px 8px;border-radius:6px;font-size:12px;cursor:pointer">🗑</button>'+
+      '</div>';
+    const wrap=kaart.querySelector('.yt-thumb-wrap');
+    if(wrap)wrap.addEventListener('click',()=>ytSpeelAf(item.id));
+    grid.appendChild(kaart);
+  });
 }
 const t0=Date.now();
 setInterval(()=>{const s=Math.floor((Date.now()-t0)/1000);document.getElementById('timeDsp').textContent=`${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`;},1000);
@@ -3750,6 +3892,10 @@ function startPokemonGoDirect(){
   },0);
 }
 function terugNaarStartpagina(){
+  // Stop een eventueel spelende YouTube-video (anders speelt het geluid
+  // onzichtbaar door achter het startscherm).
+  const huidigTab=document.querySelector('.tab-panel.active');
+  if(huidigTab&&huidigTab.id==='tab-youtube')ytRender();
   const ws=document.getElementById('welcomeScreen');
   ws.style.opacity='1';
   ws.style.display='flex';
