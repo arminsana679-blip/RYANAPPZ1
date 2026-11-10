@@ -393,11 +393,7 @@ function stemInloggen(){
   if(!SpeechRec){
     const st=document.getElementById('stemStatus');
     st.style.color='#f59e0b';
-    st.innerHTML='⚠️ Stem werkt alleen in <b>Google Chrome</b>!';
-    const hint=document.getElementById('chromeHint');
-    const adr=document.getElementById('huidigAdres');
-    if(hint){hint.style.display='block';}
-    if(adr){adr.textContent=location.href;}
+    st.innerHTML='⚠️ Stem werkt alleen in <b>Google Chrome</b>! Open deze pagina in Chrome: '+location.href;
     return;
   }
   const st=document.getElementById('stemStatus');
@@ -5723,12 +5719,6 @@ function pogoGoVerkennen(){
   document.addEventListener('keyup',pogoKeyUp);
   cancelAnimationFrame(pogoRAF);
   pogoGameLoop();
-}
-function pogoShowCustomScreen(){
-  document.getElementById('pogoHomeScreen').style.display='none';
-  document.getElementById('pogoCustomScreen').style.display='block';
-  document.getElementById('pogoCustomTitle').textContent='Pas je trainer aan, '+pogoCurrentUser+'!';
-  pogoRenderColorRows();pogoDrawTrainerPreview();
 }
 function pogoRemoveFromTeam(idx){
   const ud=pogoGetUser(pogoCurrentUser);
