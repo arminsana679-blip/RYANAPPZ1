@@ -698,14 +698,59 @@ function introNaLogin(){
   introToonSlide(0);
   introSpeelVolgende();
 }
-function introSpreekTekst(tekst,duurMs){
+// ── Spraak: minder robotachtige stem + juiste uitspraak van "Armin" ──
+let _nlStemCache=null;
+function _kiesBesteNLStem(){
+  if(_nlStemCache)return _nlStemCache;
+  if(!window.speechSynthesis)return null;
+  const stemmen=speechSynthesis.getVoices()||[];
+  const nl=stemmen.filter(v=>/^nl/i.test(v.lang));
+  if(!nl.length)return null;
+  // De standaard systeemstem (meestal "espeak") klinkt erg robotachtig.
+  // Online/natuurlijke stemmen (Google, Microsoft Natural, Fenna/Xander/Colette) klinken veel menselijker.
+  const score=v=>{
+    const n=v.name.toLowerCase();
+    if(n.includes('online')&&n.includes('natural'))return 6;
+    if(n.includes('natural'))return 5;
+    if(n.includes('google'))return 4;
+    if(n.includes('fenna')||n.includes('xander')||n.includes('colette'))return 3;
+    if(v.localService===false)return 2;
+    return 0;
+  };
+  const beste=[...nl].sort((a,b)=>score(b)-score(a))[0];
+  if(beste)_nlStemCache=beste;
+  return beste||null;
+}
+if(window.speechSynthesis){
+  speechSynthesis.getVoices();
+  if(speechSynthesis.addEventListener) speechSynthesis.addEventListener('voiceschanged',()=>{_nlStemCache=null;_kiesBesteNLStem();});
+}
+function _pasUitspraakAan(tekst){
+  if(!tekst)return tekst;
+  // "Armin" wordt door veel stemmen als "Armen" uitgesproken (de "in" valt weg
+  // tot een doffe klank). Met een koppelteken leest de stem de twee lettergrepen
+  // apart uit, wat veel dichter bij de juiste uitspraak "Ar-min" komt.
+  return tekst.replace(/\bArmin\b/g,'Ar-min');
+}
+function spreekNL(tekst,opts){
+  opts=opts||{};
   try{
-    if(!window.speechSynthesis)return;
-    speechSynthesis.cancel();
-    const u=new SpeechSynthesisUtterance(tekst);
-    u.lang='nl-NL'; u.rate=0.98; u.pitch=1.05;
+    if(!window.speechSynthesis)return null;
+    if(opts.onderbreek!==false)speechSynthesis.cancel();
+    const u=new SpeechSynthesisUtterance(_pasUitspraakAan(tekst));
+    u.lang='nl-NL';
+    u.rate=opts.rate!==undefined?opts.rate:0.95;
+    u.pitch=opts.pitch!==undefined?opts.pitch:1.05;
+    if(opts.volume!==undefined)u.volume=opts.volume;
+    const stem=_kiesBesteNLStem();
+    if(stem)u.voice=stem;
+    if(opts.onend)u.onend=opts.onend;
     speechSynthesis.speak(u);
-  }catch(e){}
+    return u;
+  }catch(e){return null;}
+}
+function introSpreekTekst(tekst,duurMs){
+  spreekNL(tekst,{rate:0.98,pitch:1.05});
 }
 function introSpeelVolgende(){
   clearTimeout(introTimer);
@@ -3056,18 +3101,12 @@ function speelWekkerFaro(){
   }catch(e){}
   // Dan de spreekstem
   setTimeout(()=>{
-    try{
-      const boodschap=new SpeechSynthesisUtterance(
-        'Faro! Goedemorgen! Het is nu '+wekkerUur+'. '+
-        'Je moet je handen poetsen, je gezicht wassen, en dan ga je naar de douche. '+
-        'Daarna ga je naar het werk. Fijn dag, Faro!'
-      );
-      boodschap.lang='nl-NL';
-      boodschap.rate=0.88;
-      boodschap.pitch=1.1;
-      boodschap.volume=1;
-      speechSynthesis.speak(boodschap);
-    }catch(e){}
+    spreekNL(
+      'Faro! Goedemorgen! Het is nu '+wekkerUur+'. '+
+      'Je moet je handen poetsen, je gezicht wassen, en dan ga je naar de douche. '+
+      'Daarna ga je naar het werk. Fijn dag, Faro!',
+      {rate:0.88,pitch:1.1,volume:1}
+    );
   },900);
   // Laat popup zien
   const st=document.getElementById('wekkerStatus');
@@ -3411,11 +3450,7 @@ const voorleesTeksten={
   koken:'Recepten voor in de keuken! Recept één: Pannenkoeken. Meng honderd gram bloem, één ei, tweehonderdvijftig milliliter melk en een beetje zout. Bak in een koekenpan met boter. Lekker! Recept twee: Pasta. Kook pasta tien minuten, doe er tomatensaus bij met kaas. Klaar in vijftien minuten! Recept drie: Salade. Sla, tomaat, komkommer en een beetje olijfolie. Simpel en heel gezond! Recept vier: Bananen smoothie. Mix één banaan, tweehonderd milliliter melk en een lepel honing. Heerlijk na het sporten! Eet smakelijk!'
 };
 function voorleesTekst(type){
-  if(!window.speechSynthesis)return;
-  speechSynthesis.cancel();
-  const u=new SpeechSynthesisUtterance(voorleesTeksten[type]||'');
-  u.lang='nl-NL'; u.rate=0.88; u.pitch=1.05;
-  speechSynthesis.speak(u);
+  spreekNL(voorleesTeksten[type]||'',{rate:0.88,pitch:1.05});
 }
 
 // Letters grid
@@ -3429,8 +3464,7 @@ function bouwLetterGrid(){
     d.style.cssText=`background:${kleuren[i%kleuren.length]}22;border:2px solid ${kleuren[i%kleuren.length]}66;border-radius:8px;padding:8px 4px;text-align:center;cursor:pointer`;
     d.innerHTML=`<div style="font-size:20px;font-weight:900;color:${kleuren[i%kleuren.length]}">${letter}</div><div style="font-size:9px;color:#888">${letter.toLowerCase()}</div>`;
     d.onclick=()=>{
-      const u=new SpeechSynthesisUtterance(letter);
-      u.lang='nl-NL'; speechSynthesis.speak(u);
+      spreekNL(letter,{rate:0.9});
       d.style.transform='scale(1.2)';
       setTimeout(()=>d.style.transform='',300);
     };
@@ -3487,14 +3521,9 @@ function voorleesGroenten(){
   Bananen geven je veel energie, zodat je kunt spelen en sporten.
   En water is heel belangrijk: drink elke dag minstens zes glazen water, want je lichaam bestaat voor meer dan de helft uit water!
   Probeer elke dag iets groens te eten. Je lichaam zegt dan: dank je wel!`;
-  const u = new SpeechSynthesisUtterance(tekst);
-  u.lang = 'nl-NL';
-  u.rate = 0.9;
-  u.pitch = 1.1;
   const btn = document.getElementById('voorleesBtn');
   if(btn) btn.textContent = '🔊 Bezig met voorlezen...';
-  u.onend = () => { if(btn) btn.textContent = '🔊 Voorlezen: Waarom zijn groenten zo belangrijk?'; };
-  speechSynthesis.speak(u);
+  spreekNL(tekst,{rate:0.9,pitch:1.1,onend:()=>{ if(btn) btn.textContent = '🔊 Voorlezen: Waarom zijn groenten zo belangrijk?'; }});
 }
 // ===== PROFIELFOTO =====
 function profielFotoLaden(input){
