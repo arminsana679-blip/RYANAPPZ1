@@ -931,7 +931,7 @@ function resetAlleGebruikers(){
     </div>
 
     <!-- Slaaptips paneel -->
-    <div id="slaapPanel" style="display:none;background:#0a0a1f;border:2px solid #818cf8;border-radius:14px;padding:14px;margin-bottom:10px">
+    <div id="slaapPanel" class="glass-panel" style="display:none;--accent:#818cf8;border-color:#818cf855;padding:14px;margin-bottom:12px">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
         <div style="font-weight:800;color:#818cf8;font-size:15px">😴 Slaaptips</div>
         <button onclick="togglePanel('slaapPanel');speechSynthesis&&speechSynthesis.cancel()" style="background:none;border:none;color:#888;font-size:18px;cursor:pointer">✕</button>
@@ -950,7 +950,7 @@ function resetAlleGebruikers(){
     </div>
 
     <!-- Bewegen paneel -->
-    <div id="beweegPanel" style="display:none;background:#1a0a00;border:2px solid #fb923c;border-radius:14px;padding:14px;margin-bottom:10px">
+    <div id="beweegPanel" class="glass-panel" style="display:none;--accent:#fb923c;border-color:#fb923c55;padding:14px;margin-bottom:12px">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
         <div style="font-weight:800;color:#fb923c;font-size:15px">🏃 Sport & Bewegen</div>
         <button onclick="togglePanel('beweegPanel');speechSynthesis&&speechSynthesis.cancel()" style="background:none;border:none;color:#888;font-size:18px;cursor:pointer">✕</button>
@@ -966,7 +966,7 @@ function resetAlleGebruikers(){
     </div>
 
     <!-- Verhaaltje paneel -->
-    <div id="verhaaltjePanel" style="display:none;background:#1a0015;border:2px solid #f472b6;border-radius:14px;padding:14px;margin-bottom:10px">
+    <div id="verhaaltjePanel" class="glass-panel" style="display:none;--accent:#f472b6;border-color:#f472b655;padding:14px;margin-bottom:12px">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
         <div style="font-weight:800;color:#f472b6;font-size:15px">📖 Verhaaltje</div>
         <button onclick="togglePanel('verhaaltjePanel');speechSynthesis&&speechSynthesis.cancel()" style="background:none;border:none;color:#888;font-size:18px;cursor:pointer">✕</button>
@@ -981,7 +981,7 @@ function resetAlleGebruikers(){
     </div>
 
     <!-- Letters paneel -->
-    <div id="lettersPanel" style="display:none;background:#1a1200;border:2px solid #fbbf24;border-radius:14px;padding:14px;margin-bottom:10px">
+    <div id="lettersPanel" class="glass-panel" style="display:none;--accent:#fbbf24;border-color:#fbbf2455;padding:14px;margin-bottom:12px">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
         <div style="font-weight:800;color:#fbbf24;font-size:15px">🔤 Letters & Alfabet</div>
         <button onclick="togglePanel('lettersPanel');speechSynthesis&&speechSynthesis.cancel()" style="background:none;border:none;color:#888;font-size:18px;cursor:pointer">✕</button>
@@ -991,7 +991,7 @@ function resetAlleGebruikers(){
     </div>
 
     <!-- Koken paneel -->
-    <div id="keukenPanel" style="display:none;background:#1a0505;border:2px solid #f87171;border-radius:14px;padding:14px;margin-bottom:10px">
+    <div id="keukenPanel" class="glass-panel" style="display:none;--accent:#f87171;border-color:#f8717155;padding:14px;margin-bottom:12px">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
         <div style="font-weight:800;color:#f87171;font-size:15px">👨‍🍳 Koken & Recepten</div>
         <button onclick="togglePanel('keukenPanel');speechSynthesis&&speechSynthesis.cancel()" style="background:none;border:none;color:#888;font-size:18px;cursor:pointer">✕</button>
@@ -1006,7 +1006,7 @@ function resetAlleGebruikers(){
     </div>
 
     <!-- Tekenen paneel (canvas) -->
-    <div id="tekenPanel" style="display:none;background:#050f05;border:2px solid #34d399;border-radius:14px;padding:14px;margin-bottom:10px">
+    <div id="tekenPanel" class="glass-panel" style="display:none;--accent:#34d399;border-color:#34d39955;padding:14px;margin-bottom:12px">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
         <div style="font-weight:800;color:#34d399;font-size:15px">🎨 Tekenen</div>
         <button onclick="togglePanel('tekenPanel')" style="background:none;border:none;color:#888;font-size:18px;cursor:pointer">✕</button>
@@ -1052,7 +1052,7 @@ function resetAlleGebruikers(){
     </div>
 
     <!-- Chat paneel -->
-    <div id="chatPanel" style="display:none;background:#0a1a2a;border:2px solid #38bdf8;border-radius:14px;padding:14px;margin-bottom:10px">
+    <div id="chatPanel" class="glass-panel" style="display:none;--accent:#38bdf8;border-color:#38bdf855;padding:14px;margin-bottom:12px">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
         <div style="font-weight:800;color:#38bdf8;font-size:15px">💬 Chat — Studio Vrienden</div>
         <button onclick="document.getElementById('chatPanel').style.display='none';clearInterval(window.chatRefreshInterval)" style="background:none;border:none;color:#888;font-size:18px;cursor:pointer">✕</button>
@@ -1072,7 +1072,7 @@ function resetAlleGebruikers(){
     </div>
 
     <!-- Muziek speler popup -->
-    <div id="muziekPanel" style="display:none;background:#111118;border:2px solid #f59e0b;border-radius:14px;padding:16px;margin-bottom:10px;text-align:left">
+    <div id="muziekPanel" class="glass-panel" style="display:none;--accent:#f59e0b;border-color:#f59e0b55;padding:16px;margin-bottom:12px;text-align:left">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
         <div style="font-weight:800;color:#f59e0b;font-size:14px">🎧 Muziek Luisteren</div>
         <button onclick="sluitMuziek()" style="background:none;border:none;color:#888;font-size:16px;cursor:pointer">✕</button>
@@ -1109,7 +1109,7 @@ function resetAlleGebruikers(){
     </div>
 
     <!-- Gezond eten popup -->
-    <div id="gezondPanel" style="display:none;background:#0d1f0d;border:2px solid #4ade80;border-radius:14px;padding:16px;margin-bottom:10px;text-align:left">
+    <div id="gezondPanel" class="glass-panel" style="display:none;--accent:#4ade80;border-color:#4ade8055;padding:16px;margin-bottom:12px;text-align:left">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
         <div style="font-weight:800;color:#4ade80;font-size:16px">🥦 Gezond Eten</div>
         <button onclick="document.getElementById('gezondPanel').style.display='none';window.speechSynthesis&&speechSynthesis.cancel()" style="background:none;border:none;color:#888;font-size:18px;cursor:pointer">✕</button>
@@ -1335,42 +1335,42 @@ function resetAlleGebruikers(){
         <button onclick="terugNaarStartpagina()" style="background:#3b0764;border:none;color:#fff;padding:7px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;margin-bottom:12px">🏠 Terug naar startpagina</button>
         <div class="section-title" style="margin-bottom:16px">🎮 Kies een spel</div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-          <div onclick="startGame('simon')" style="background:#111118;border:2px solid #1e1e2e;border-radius:12px;padding:20px;cursor:pointer;text-align:center;transition:.15s" onmouseover="this.style.borderColor='#a78bfa'" onmouseout="this.style.borderColor='#1e1e2e'">
+          <div onclick="startGame('simon')" class="glass-tile" style="--accent:#a78bfa;padding:20px">
             <div style="font-size:36px;margin-bottom:8px">🥁</div>
             <div style="font-weight:700;font-size:15px;color:#e2e8f0">Simon Zegt</div>
             <div style="font-size:12px;color:#555;margin-top:4px">Onthoud de drum-volgorde</div>
           </div>
-          <div onclick="startGame('keersom')" style="background:#111118;border:2px solid #1e1e2e;border-radius:12px;padding:20px;cursor:pointer;text-align:center;transition:.15s" onmouseover="this.style.borderColor='#a78bfa'" onmouseout="this.style.borderColor='#1e1e2e'">
+          <div onclick="startGame('keersom')" class="glass-tile" style="--accent:#a78bfa;padding:20px">
             <div style="font-size:36px;margin-bottom:8px">✖️</div>
             <div style="font-weight:700;font-size:15px;color:#e2e8f0">Keersom Leren</div>
             <div style="font-size:12px;color:#555;margin-top:4px">Oefen je tafels · met timer</div>
           </div>
-          <div onclick="startGame('ritme')" style="background:#111118;border:2px solid #1e1e2e;border-radius:12px;padding:20px;cursor:pointer;text-align:center;transition:.15s" onmouseover="this.style.borderColor='#a78bfa'" onmouseout="this.style.borderColor='#1e1e2e'">
+          <div onclick="startGame('ritme')" class="glass-tile" style="--accent:#a78bfa;padding:20px">
             <div style="font-size:36px;margin-bottom:8px">🎵</div>
             <div style="font-weight:700;font-size:15px;color:#e2e8f0">Raad het Ritme</div>
             <div style="font-size:12px;color:#555;margin-top:4px">Hoor en tap het ritme na</div>
           </div>
-          <div onclick="startGame('noten')" style="background:#111118;border:2px solid #1e1e2e;border-radius:12px;padding:20px;cursor:pointer;text-align:center;transition:.15s" onmouseover="this.style.borderColor='#a78bfa'" onmouseout="this.style.borderColor='#1e1e2e'">
+          <div onclick="startGame('noten')" class="glass-tile" style="--accent:#a78bfa;padding:20px">
             <div style="font-size:36px;margin-bottom:8px">🎹</div>
             <div style="font-weight:700;font-size:15px;color:#e2e8f0">Raad de Noot</div>
             <div style="font-size:12px;color:#555;margin-top:4px">Hoor een noot · welke is het?</div>
           </div>
-          <div onclick="startGame('kart')" style="background:#111118;border:2px solid #1e1e2e;border-radius:12px;padding:20px;cursor:pointer;text-align:center;transition:.15s" onmouseover="this.style.borderColor='#f59e0b'" onmouseout="this.style.borderColor='#1e1e2e'">
+          <div onclick="startGame('kart')" class="glass-tile" style="--accent:#f59e0b;padding:20px">
             <div style="font-size:32px;margin-bottom:6px">🏎️</div>
             <div style="font-weight:700;font-size:13px">Mario Kart</div>
             <div style="font-size:11px;color:#666;margin-top:3px">Rijden & racen</div>
           </div>
-          <div onclick="startGame('platform')" style="background:#111118;border:2px solid #1e1e2e;border-radius:12px;padding:20px;cursor:pointer;text-align:center;transition:.15s" onmouseover="this.style.borderColor='#e11d48'" onmouseout="this.style.borderColor='#1e1e2e'">
+          <div onclick="startGame('platform')" class="glass-tile" style="--accent:#e11d48;padding:20px">
             <div style="font-size:36px;margin-bottom:8px">🕹️</div>
             <div style="font-weight:700;font-size:15px;color:#e2e8f0">Spring & Loop</div>
             <div style="font-size:12px;color:#555;margin-top:4px">Platformer · Muntjes · Vijanden</div>
           </div>
-          <div onclick="startGame('mariou')" style="background:#111118;border:2px solid #1e1e2e;border-radius:12px;padding:20px;cursor:pointer;text-align:center;transition:.15s" onmouseover="this.style.borderColor='#dc2626'" onmouseout="this.style.borderColor='#1e1e2e'">
+          <div onclick="startGame('mariou')" class="glass-tile" style="--accent:#dc2626;padding:20px">
             <div style="font-size:36px;margin-bottom:8px">🍄</div>
             <div style="font-weight:700;font-size:15px;color:#e2e8f0">New Super Mario U</div>
             <div style="font-size:12px;color:#555;margin-top:4px">Mario · Luigi · Toad · Toadette</div>
           </div>
-          <div onclick="startGame('pogo')" style="background:#111118;border:2px solid #1e1e2e;border-radius:12px;padding:20px;cursor:pointer;text-align:center;transition:.15s;grid-column:span 2" onmouseover="this.style.borderColor='#ef4444'" onmouseout="this.style.borderColor='#1e1e2e'">
+          <div onclick="startGame('pogo')" class="glass-tile" style="--accent:#ef4444;padding:20px;grid-column:span 2">
             <div style="font-size:36px;margin-bottom:8px">🎮</div>
             <div style="font-weight:700;font-size:15px;color:#e2e8f0">Pokémon Go</div>
             <div style="font-size:12px;color:#555;margin-top:4px">Vang Pokémon · Kies je trainer</div>
@@ -1725,7 +1725,7 @@ function resetAlleGebruikers(){
     <div style="max-width:700px">
       <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px">
         <div class="section-title" style="margin:0">🛒 Winkel</div>
-        <div style="margin-left:auto;background:#1a1a2a;border:1px solid #2e2e45;border-radius:8px;padding:6px 14px;font-size:14px;font-weight:700;color:#f59e0b">🪙 <span id="muntenDisplay">0</span> munten</div>
+        <div class="glass-pill" style="margin-left:auto;padding:6px 14px;font-size:14px;font-weight:700;color:#fbbf24">🪙 <span id="muntenDisplay">0</span> munten</div>
       </div>
       <div style="font-size:12px;color:#555;margin-bottom:16px">Verdien munten door spellen te spelen · Koop nieuwe pakketten voor de studio</div>
       <div id="winkelGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px"></div>
@@ -1740,47 +1740,47 @@ function resetAlleGebruikers(){
         <div class="section-title" style="margin:0">🏪 Speelgoed Paradijs</div>
         <div style="margin-left:auto;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
           <!-- WiFi toggle -->
-          <div id="shopWifi" onclick="shopToggleWifi()" style="cursor:pointer;background:#1a1a2a;border:2px solid #22c55e;border-radius:20px;padding:4px 12px;font-size:12px;font-weight:800;color:#22c55e;display:flex;align-items:center;gap:5px;user-select:none">
+          <div id="shopWifi" onclick="shopToggleWifi()" class="glass-pill" style="cursor:pointer;border-color:#22c55e66;padding:4px 12px;font-size:12px;font-weight:800;color:#4ade80;display:flex;align-items:center;gap:5px;user-select:none">
             <span id="shopWifiDot" style="width:8px;height:8px;border-radius:50%;background:#22c55e;display:inline-block"></span>
             <span id="shopWifiTxt">WiFi AAN</span> 📶
           </div>
           <!-- Betaalkaart -->
-          <button onclick="shopShowKaart()" style="background:#3b82f6;border:none;border-radius:10px;padding:5px 12px;color:#fff;font-weight:800;font-size:12px;cursor:pointer">💳 Mijn Kaart</button>
+          <button onclick="shopShowKaart()" class="glass-pill" style="padding:5px 14px;color:#60a5fa;font-weight:800;font-size:12px;cursor:pointer;border-color:#3b82f666">💳 Mijn Kaart</button>
           <!-- Mandje -->
-          <button onclick="shopShowMandje()" style="background:#f59e0b;border:none;border-radius:10px;padding:5px 12px;color:#111;font-weight:800;font-size:12px;cursor:pointer">🛒 Mandje <span id="shopMandjeCount" style="background:#dc2626;color:#fff;border-radius:50%;padding:0 5px;font-size:11px">0</span></button>
+          <button onclick="shopShowMandje()" class="glass-pill" style="padding:5px 14px;color:#fbbf24;font-weight:800;font-size:12px;cursor:pointer;border-color:#f59e0b66">🛒 Mandje <span id="shopMandjeCount" style="background:#dc2626;color:#fff;border-radius:50%;padding:0 5px;font-size:11px">0</span></button>
           <!-- Munten -->
-          <div style="background:#1a1a2a;border:1px solid #2e2e45;border-radius:8px;padding:5px 12px;font-size:13px;font-weight:700;color:#f59e0b">🪙 <span id="shopMunten">0</span></div>
+          <div class="glass-pill" style="padding:5px 14px;font-size:13px;font-weight:700;color:#fbbf24">🪙 <span id="shopMunten">0</span></div>
         </div>
       </div>
       <!-- Categorie tabs -->
       <div style="display:flex;gap:6px;margin-bottom:14px;overflow-x:auto;padding-bottom:4px">
-        <button onclick="shopSetCat('speelgoed')" id="shopCatSpeelgoed" class="shopCatBtn active-cat" style="padding:7px 14px;border:2px solid #a78bfa;border-radius:10px;background:#2a1a4a;color:#a78bfa;font-weight:800;font-size:12px;cursor:pointer;white-space:nowrap">🧸 Speelgoed</button>
-        <button onclick="shopSetCat('eten')" id="shopCatEten" class="shopCatBtn" style="padding:7px 14px;border:2px solid #333;border-radius:10px;background:#111118;color:#aaa;font-weight:800;font-size:12px;cursor:pointer;white-space:nowrap">🥦 Gezond Eten</button>
-        <button onclick="shopSetCat('boeken')" id="shopCatBoeken" class="shopCatBtn" style="padding:7px 14px;border:2px solid #333;border-radius:10px;background:#111118;color:#aaa;font-weight:800;font-size:12px;cursor:pointer;white-space:nowrap">📚 Boeken</button>
-        <button onclick="shopSetCat('elektronica')" id="shopCatElektronica" class="shopCatBtn" style="padding:7px 14px;border:2px solid #333;border-radius:10px;background:#111118;color:#aaa;font-weight:800;font-size:12px;cursor:pointer;white-space:nowrap">📱 Elektronica</button>
+        <button onclick="shopSetCat('speelgoed')" id="shopCatSpeelgoed" class="shopCatBtn active-cat glass-pill" style="padding:7px 16px;border-color:#a78bfa;color:#c4b5fd;font-weight:800;font-size:12px;cursor:pointer;white-space:nowrap">🧸 Speelgoed</button>
+        <button onclick="shopSetCat('eten')" id="shopCatEten" class="shopCatBtn glass-pill" style="padding:7px 16px;color:#aaa;font-weight:800;font-size:12px;cursor:pointer;white-space:nowrap">🥦 Gezond Eten</button>
+        <button onclick="shopSetCat('boeken')" id="shopCatBoeken" class="shopCatBtn glass-pill" style="padding:7px 16px;color:#aaa;font-weight:800;font-size:12px;cursor:pointer;white-space:nowrap">📚 Boeken</button>
+        <button onclick="shopSetCat('elektronica')" id="shopCatElektronica" class="shopCatBtn glass-pill" style="padding:7px 16px;color:#aaa;font-weight:800;font-size:12px;cursor:pointer;white-space:nowrap">📱 Elektronica</button>
       </div>
       <!-- Product grid -->
       <div id="shopProductGrid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px"></div>
     </div>
 
     <!-- Mandje modal -->
-    <div id="shopMandjeModal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.75);z-index:9000;display:none;align-items:center;justify-content:center">
-      <div style="background:#0f0f1a;border:2px solid #2e2e45;border-radius:16px;padding:20px;width:90%;max-width:380px;max-height:80vh;overflow-y:auto">
+    <div id="shopMandjeModal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(6px);z-index:9000;display:none;align-items:center;justify-content:center">
+      <div class="glass-panel" style="padding:20px;width:90%;max-width:380px;max-height:80vh;overflow-y:auto">
         <div style="font-size:18px;font-weight:800;margin-bottom:14px">🛒 Mijn Mandje</div>
         <div id="shopMandjeItems" style="display:flex;flex-direction:column;gap:8px;margin-bottom:14px"></div>
         <div style="border-top:1px solid #2e2e45;padding-top:12px;display:flex;justify-content:space-between;align-items:center">
           <div style="font-size:15px;font-weight:800">Totaal: <span id="shopTotaal" style="color:#f59e0b">🪙 0</span></div>
           <div style="display:flex;gap:8px">
-            <button onclick="shopSluitMandje()" style="padding:8px 14px;background:#333;border:none;border-radius:8px;color:#fff;font-weight:700;cursor:pointer">✖ Sluiten</button>
-            <button onclick="shopAfrekenen()" style="padding:8px 16px;background:#22c55e;border:none;border-radius:8px;color:#111;font-weight:800;cursor:pointer">💳 Afrekenen</button>
+            <button onclick="shopSluitMandje()" class="glass-pill" style="padding:8px 16px;color:#ccc;font-weight:700;cursor:pointer">✖ Sluiten</button>
+            <button onclick="shopAfrekenen()" style="padding:8px 18px;background:linear-gradient(135deg,#22c55e,#4ade80);border:1px solid rgba(255,255,255,.3);border-radius:999px;color:#06240f;font-weight:800;cursor:pointer;box-shadow:0 6px 18px rgba(34,197,94,.35)">💳 Afrekenen</button>
           </div>
         </div>
       </div>
     </div>
 
     <!-- Betaalkaart modal -->
-    <div id="shopKaartModal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.75);z-index:9000;align-items:center;justify-content:center">
-      <div style="background:#0f0f1a;border:2px solid #2e2e45;border-radius:16px;padding:20px;width:90%;max-width:380px;text-align:center">
+    <div id="shopKaartModal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(6px);z-index:9000;align-items:center;justify-content:center">
+      <div class="glass-panel" style="padding:20px;width:90%;max-width:380px;text-align:center">
         <div style="font-size:16px;font-weight:800;margin-bottom:14px">💳 Mijn Betaalkaart</div>
         <!-- Kaart afbeelding -->
         <div style="background:linear-gradient(135deg,#3b82f6,#8b5cf6);border-radius:16px;padding:20px;margin:0 auto 16px;max-width:300px;text-align:left;box-shadow:0 8px 32px rgba(59,130,246,0.4)">
@@ -2842,7 +2842,8 @@ function buildWinkel(){
     WINKEL_ITEMS.filter(i=>i.cat===cat.key).forEach(item=>{
       const gekocht=gekochteItems.includes(item.id);
       const card=document.createElement('div');
-      card.style.cssText=`background:#111118;border:2px solid ${gekocht?'#22c55e':'#1e1e2e'};border-radius:12px;padding:14px;text-align:center;`;
+      card.className='glass-tile';
+      card.style.cssText=`--accent:${gekocht?'#22c55e':'#a78bfa'};${gekocht?'border-color:#22c55e88;':''}padding:14px;`;
       card.innerHTML=`
         <div style="font-size:28px;margin-bottom:6px">${item.icon}</div>
         <div style="font-weight:700;font-size:13px;color:#e2e8f0;margin-bottom:3px">${item.naam}</div>
@@ -6534,9 +6535,9 @@ function shopSetCat(cat){
     const btn=document.getElementById('shopCat'+c.charAt(0).toUpperCase()+c.slice(1));
     if(!btn)return;
     if(c===cat){
-      btn.style.borderColor='#a78bfa';btn.style.background='#2a1a4a';btn.style.color='#a78bfa';
+      btn.style.borderColor='#a78bfa';btn.style.color='#c4b5fd';
     } else {
-      btn.style.borderColor='#333';btn.style.background='#111118';btn.style.color='#aaa';
+      btn.style.borderColor='';btn.style.color='#aaa';
     }
   });
   shopRenderGrid();
@@ -6550,7 +6551,8 @@ function shopRenderGrid(){
   producten.forEach(p=>{
     const inMandje=shopMandje.filter(m=>m.id===p.id).length;
     const d=document.createElement('div');
-    d.style.cssText='background:#111118;border:2px solid '+(inMandje?'#a78bfa':'#1e1e2e')+';border-radius:12px;padding:12px 8px;text-align:center;position:relative;transition:.15s';
+    d.className='glass-tile';
+    d.style.cssText='--accent:#a78bfa;'+(inMandje?'border-color:#a78bfa88;':'')+'position:relative';
     d.innerHTML=`
       <div style="font-size:36px;margin-bottom:6px">${p.emoji}</div>
       <div style="font-size:11px;font-weight:800;color:#e2e8f0;margin-bottom:3px">${p.naam}</div>
