@@ -173,12 +173,15 @@ select{padding:4px 8px;background:#1a1a2a;border:1px solid #2e2e45;border-radius
 }
 #welcomeBgCanvas{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:0;transition:opacity .6s}
 #welcomeBgCanvas.actief{opacity:1}
+#welkomBgKiezerOverlay{
+  position:fixed;inset:0;z-index:10002;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);
+  display:flex;align-items:center;justify-content:center;
+}
 #welkomBgKiezerPanel{
-  position:fixed;bottom:80px;left:50%;transform:translateX(-50%);
-  background:rgba(20,20,35,.95);backdrop-filter:blur(24px);
-  border:1px solid rgba(255,255,255,.12);border-radius:20px;
-  padding:16px 18px;z-index:10001;width:min(380px,90vw);
-  box-shadow:0 20px 60px rgba(0,0,0,.5);
+  background:rgba(20,20,35,.98);backdrop-filter:blur(24px);
+  border:1px solid rgba(255,255,255,.15);border-radius:24px;
+  padding:20px;width:min(400px,92vw);max-height:90vh;overflow-y:auto;
+  box-shadow:0 24px 70px rgba(0,0,0,.7);
 }
 .wbk-kleur{width:30px;height:30px;border-radius:50%;border:2px solid rgba(255,255,255,.3);cursor:pointer;transition:transform .2s,border-color .2s;flex-shrink:0}
 .wbk-kleur:hover,.wbk-kleur.actief{transform:scale(1.25);border-color:#fff}
@@ -990,35 +993,52 @@ function resetAlleGebruikers(){
   <!-- Achtergrond animatie canvas -->
   <canvas id="welcomeBgCanvas"></canvas>
 
-  <!-- Achtergrond kiezer panel -->
-  <div id="welkomBgKiezerPanel" style="display:none">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-      <div style="font-size:13px;font-weight:800;color:#e2e8f0">🎨 Achtergrond kiezen</div>
-      <button onclick="sluitBgKiezer()" style="background:none;border:none;color:#9a9ab0;font-size:18px;cursor:pointer">✕</button>
-    </div>
-    <div style="font-size:11px;color:#9a9ab0;margin-bottom:8px;font-weight:700;text-transform:uppercase;letter-spacing:1px">Kleur</div>
-    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px">
-      <div class="wbk-kleur" style="background:#1a1a2e" onclick="kiesWelkomKleur('#1a1a2e')" title="Donker blauw"></div>
-      <div class="wbk-kleur" style="background:#0f172a" onclick="kiesWelkomKleur('#0f172a')" title="Nachtblauw"></div>
-      <div class="wbk-kleur" style="background:#1a0a2e" onclick="kiesWelkomKleur('#1a0a2e')" title="Paars"></div>
-      <div class="wbk-kleur" style="background:#0a1f0a" onclick="kiesWelkomKleur('#0a1f0a')" title="Donkergroen"></div>
-      <div class="wbk-kleur" style="background:#1a0a0a" onclick="kiesWelkomKleur('#1a0a0a')" title="Donkerrood"></div>
-      <div class="wbk-kleur" style="background:#0a0a0a" onclick="kiesWelkomKleur('#0a0a0a')" title="Zwart"></div>
-      <div class="wbk-kleur" style="background:#1e293b" onclick="kiesWelkomKleur('#1e293b')" title="Leisteen"></div>
-      <div class="wbk-kleur" style="background:#f2f2f7" onclick="kiesWelkomKleur('#f2f2f7')" title="Wit/licht"></div>
-      <label class="wbk-kleur" style="background:conic-gradient(red,yellow,lime,cyan,blue,magenta,red);display:flex;align-items:center;justify-content:center;font-size:14px" title="Eigen kleur">
-        <input type="color" id="welkomEigenKleur" style="opacity:0;position:absolute;width:0;height:0" oninput="kiesWelkomKleur(this.value)">
-        +
-      </label>
-    </div>
-    <div style="font-size:11px;color:#9a9ab0;margin-bottom:8px;font-weight:700;text-transform:uppercase;letter-spacing:1px">Animatie</div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
-      <div class="wbk-anim" id="wbk-geen" onclick="kiesWelkomAnim('geen')">⬛ Geen</div>
-      <div class="wbk-anim" id="wbk-noorderlicht" onclick="kiesWelkomAnim('noorderlicht')">🌌 Noorderlicht</div>
-      <div class="wbk-anim" id="wbk-sterren" onclick="kiesWelkomAnim('sterren')">✨ Sterren</div>
-      <div class="wbk-anim" id="wbk-zonsondergang" onclick="kiesWelkomAnim('zonsondergang')">🌅 Zonsondergang</div>
-      <div class="wbk-anim" id="wbk-oceaan" onclick="kiesWelkomAnim('oceaan')">🌊 Oceaan</div>
-      <div class="wbk-anim" id="wbk-galaxy" onclick="kiesWelkomAnim('galaxy')">🌠 Galaxy</div>
+  <!-- Achtergrond kiezer overlay -->
+  <div id="welkomBgKiezerOverlay" style="display:none" onclick="if(event.target===this)sluitBgKiezer()">
+    <div id="welkomBgKiezerPanel">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+        <div style="font-size:15px;font-weight:800;color:#e2e8f0">🎨 Achtergrond aanpassen</div>
+        <button onclick="sluitBgKiezer()" style="background:rgba(255,255,255,.1);border:none;color:#e2e8f0;font-size:16px;cursor:pointer;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center">✕</button>
+      </div>
+
+      <div style="font-size:11px;color:#9a9ab0;margin-bottom:8px;font-weight:700;text-transform:uppercase;letter-spacing:1px">🌈 Achtergrond kleur</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;align-items:center">
+        <div class="wbk-kleur" style="background:#1a1a2e" onclick="kiesWelkomKleur('#1a1a2e')" title="Donker blauw"></div>
+        <div class="wbk-kleur" style="background:#0f172a" onclick="kiesWelkomKleur('#0f172a')" title="Nachtblauw"></div>
+        <div class="wbk-kleur" style="background:#1a0a2e" onclick="kiesWelkomKleur('#1a0a2e')" title="Paars"></div>
+        <div class="wbk-kleur" style="background:#0a1f0a" onclick="kiesWelkomKleur('#0a1f0a')" title="Donkergroen"></div>
+        <div class="wbk-kleur" style="background:#1a0a0a" onclick="kiesWelkomKleur('#1a0a0a')" title="Donkerrood"></div>
+        <div class="wbk-kleur" style="background:#0a0a0a" onclick="kiesWelkomKleur('#0a0a0a')" title="Zwart"></div>
+        <div class="wbk-kleur" style="background:#1e293b" onclick="kiesWelkomKleur('#1e293b')" title="Leisteen"></div>
+        <div class="wbk-kleur" style="background:#f2f2f7" onclick="kiesWelkomKleur('#f2f2f7')" title="Wit/licht"></div>
+        <label class="wbk-kleur" style="background:conic-gradient(red,yellow,lime,cyan,blue,magenta,red);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:900;color:#fff" title="Eigen kleur kiezen">
+          <input type="color" id="welkomEigenKleur" style="opacity:0;position:absolute;width:0;height:0" oninput="kiesWelkomKleur(this.value)">+
+        </label>
+      </div>
+
+      <div style="font-size:11px;color:#9a9ab0;margin-bottom:8px;font-weight:700;text-transform:uppercase;letter-spacing:1px">🖼️ Hero kaart kleur</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;align-items:center">
+        <div class="wbk-kleur" style="background:#1c1c2e" onclick="kiesHeroKleur('#1c1c2e')" title="Donker"></div>
+        <div class="wbk-kleur" style="background:#0d0d1a" onclick="kiesHeroKleur('#0d0d1a')" title="Zeer donker"></div>
+        <div class="wbk-kleur" style="background:#1a0a3e" onclick="kiesHeroKleur('#1a0a3e')" title="Diep paars"></div>
+        <div class="wbk-kleur" style="background:#0a2010" onclick="kiesHeroKleur('#0a2010')" title="Donkergroen"></div>
+        <div class="wbk-kleur" style="background:#1a0810" onclick="kiesHeroKleur('#1a0810')" title="Donkerrood"></div>
+        <div class="wbk-kleur" style="background:#0a1428" onclick="kiesHeroKleur('#0a1428')" title="Navy"></div>
+        <div class="wbk-kleur" style="background:rgba(255,255,255,.08)" onclick="kiesHeroKleur('rgba(255,255,255,.08)')" title="Transparant"></div>
+        <label class="wbk-kleur" style="background:conic-gradient(red,yellow,lime,cyan,blue,magenta,red);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:900;color:#fff" title="Eigen kleur">
+          <input type="color" id="heroEigenKleur" style="opacity:0;position:absolute;width:0;height:0" oninput="kiesHeroKleur(this.value)">+
+        </label>
+      </div>
+
+      <div style="font-size:11px;color:#9a9ab0;margin-bottom:8px;font-weight:700;text-transform:uppercase;letter-spacing:1px">✨ Animatie</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
+        <div class="wbk-anim" id="wbk-geen" onclick="kiesWelkomAnim('geen')">⬛ Geen</div>
+        <div class="wbk-anim" id="wbk-noorderlicht" onclick="kiesWelkomAnim('noorderlicht')">🌌 Noorderlicht</div>
+        <div class="wbk-anim" id="wbk-sterren" onclick="kiesWelkomAnim('sterren')">✨ Sterren</div>
+        <div class="wbk-anim" id="wbk-zonsondergang" onclick="kiesWelkomAnim('zonsondergang')">🌅 Zonsondergang</div>
+        <div class="wbk-anim" id="wbk-oceaan" onclick="kiesWelkomAnim('oceaan')">🌊 Oceaan</div>
+        <div class="wbk-anim" id="wbk-galaxy" onclick="kiesWelkomAnim('galaxy')">🌠 Galaxy</div>
+      </div>
     </div>
   </div>
 
@@ -1030,8 +1050,9 @@ function resetAlleGebruikers(){
   <div style="position:relative;z-index:1;text-align:center;max-width:600px;width:100%">
 
     <!-- Netflix-style hero: rustig, chique, geen drukte -->
-    <div class="nf-hero">
+    <div class="nf-hero" id="nfHero">
       <button onclick="uitloggen()" class="nf-logout" title="Uitloggen">⏻</button>
+      <button onclick="openBgKiezer()" title="Achtergrond aanpassen" style="position:absolute;top:14px;right:52px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:#e2e8f0;font-size:14px;cursor:pointer;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:2;transition:background .2s" onmouseover="this.style.background='rgba(255,255,255,.22)'" onmouseout="this.style.background='rgba(255,255,255,.12)'">🎨</button>
 
       <div class="nf-hero-top">
         <div id="welcomeClock" class="nf-pill"></div>
@@ -3360,27 +3381,35 @@ let _bgAnimNaam='geen';
 function laadWelcomeKleur(){
   const k=localStorage.getItem('la_welcomeKleur')||'#1a1a2e';
   const a=localStorage.getItem('la_welcomeAnim')||'geen';
+  const hk=localStorage.getItem('la_heroKleur');
   const ws=document.getElementById('welcomeScreen');
   if(ws)ws.style.background=k;
+  if(hk){const hero=document.getElementById('nfHero');if(hero)hero.style.background=hk;}
   _bgAnimNaam=a;
   _startWelkomAnim(a);
 }
 
 function openBgKiezer(){
-  const p=document.getElementById('welkomBgKiezerPanel');
-  if(!p)return;
-  p.style.display=p.style.display==='none'?'block':'none';
+  const o=document.getElementById('welkomBgKiezerOverlay');
+  if(!o)return;
+  o.style.display='flex';
   _updateBgKiezerActief();
 }
 function sluitBgKiezer(){
-  const p=document.getElementById('welkomBgKiezerPanel');
-  if(p)p.style.display='none';
+  const o=document.getElementById('welkomBgKiezerOverlay');
+  if(o)o.style.display='none';
 }
 
 function kiesWelkomKleur(kleur){
   const ws=document.getElementById('welcomeScreen');
   if(ws)ws.style.background=kleur;
   localStorage.setItem('la_welcomeKleur',kleur);
+}
+
+function kiesHeroKleur(kleur){
+  const hero=document.getElementById('nfHero');
+  if(hero)hero.style.background=kleur;
+  localStorage.setItem('la_heroKleur',kleur);
 }
 
 function kiesWelkomAnim(naam){
